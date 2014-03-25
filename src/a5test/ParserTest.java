@@ -1,5 +1,6 @@
-package a4test;
-import a4.*;
+package a5test;
+import ast.*;
+import parse.*;
 import java.io.Reader;
 import java.io.StringReader;
 import static org.junit.Assert.*;

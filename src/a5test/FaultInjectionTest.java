@@ -1,6 +1,6 @@
-package a4test;
-import a4.*;
-import a4.Rule;
+package a5test;
+import ast.*;
+import parse.*;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
