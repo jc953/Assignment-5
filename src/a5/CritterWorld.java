@@ -9,10 +9,9 @@ public class CritterWorld {
 	
 	public CritterWorld(String file) throws FileNotFoundException{
 		hexes = new Hex[Constants.MAX_COLUMN][Constants.MAX_ROW-Constants.MAX_COLUMN/2];
-		BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
-		String line;
 		try {
-			line = br.readLine();
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
+			String line = br.readLine();
 			while (line != null){
 				if (line.charAt(0)=='r'){
 					createRock(line);
@@ -24,6 +23,7 @@ public class CritterWorld {
 				}
 				line = br.readLine();
 			}
+			br.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

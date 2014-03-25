@@ -80,6 +80,7 @@ public class Constants {
 				default: throw new FileNotFoundException();
 				}
 			}
+			br.close();
 		}
 		catch(FileNotFoundException fnfe){
 			System.out.println("No such file");
