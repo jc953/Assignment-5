@@ -16,7 +16,7 @@ public class ParserTest {
 		StringBuffer sb = new StringBuffer();
 		p.parse(r).prettyPrint(sb);
 		System.out.println(sb);
-		assertTrue(sb.equals("3 < 5 --> forward ;");
+		assertTrue(sb.equals("3 < 5 --> forward ;"));
 		
 		r = new StringReader("3 * 3 > 8 + 9 --> tag [ 3 ]");
 		sb = new StringBuffer();
