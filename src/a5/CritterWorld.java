@@ -1,11 +1,15 @@
 package a5;
 
 import java.io.*;
+import java.util.ArrayList;
+
 import ast.*;
 import parse.*;
 
 public class CritterWorld {
 	Hex[][] hexes;
+	ArrayList<Critter> critters;
+	int steps;
 	
 	public CritterWorld(String file) throws FileNotFoundException{
 		hexes = new Hex[Constants.MAX_COLUMN][Constants.MAX_ROW-Constants.MAX_COLUMN/2];
@@ -43,16 +47,33 @@ public class CritterWorld {
 	}
 	
 	public void createCritter(String line){
-		
+		String[] str = line.split(" ");
+		if (str.length != 5){
+			System.out.println("Please enter a file with correct syntax.");
+			throw new RuntimeException();
+		}
+		int row = Integer.parseInt(str[2]);
+		int column = Integer.parseInt(str[3]);
+		int arrayRow = row - ((column+1)/2);
+		Critter c = new Critter(str[1], Integer.parseInt(str[4]), this);
+		hexes[column][arrayRow].setCritter(c);
 	}
 	
 	public void step(){
-		for(int i=0;i<hexes.length;i++){
-			for(int j=0;j<hexes[i].length;j++){
-				if (hexes[i][j].getCritter()!=null){
-					hexes[i][j].getCritter().step();
-				}
+		for (Critter c : critters){
+			c.step();
+		}
+		steps++;
+	}
+	
+	public void info(){
+		System.out.println(steps + " steps have elapsed.");
+		System.out.println(critters.size() + " critters are alive.");
+		if (hexes.length == 1){
+			for (int i = hexes[0].length-1; i >= 0; i--){
+				System.out.println(hexes[0][i].getInfo()+"\n");
 			}
 		}
+		//DO THIS SHIT
 	}
 }

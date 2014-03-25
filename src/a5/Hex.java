@@ -12,4 +12,22 @@ public class Hex {
 	public void setRock(){
 		rock = true;
 	}
+	
+	public void setCritter(Critter c){
+		critter = c;
+	}
+	
+	public String getInfo(){
+		if (rock){
+			return "# ";
+		} else if (critter != null && food > 0){
+			return "G" + Integer.parseInt(critter.direction);
+		} else if (critter != null){
+			return "C" + Integer.parseInt(critter.direction);
+		} else if (food > 0){
+			return "F ";
+		} else {
+			return "- ";
+		}
+	}
 }
