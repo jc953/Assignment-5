@@ -25,7 +25,7 @@ public class Logical extends Binary<Condition, Logical.Op> implements Condition 
 	}
     
     @Override
-	public boolean eval(/*Critter c*/) {
+	public boolean eval() {
 		// TODO implement me!
 		// returns the boolean value of this condition for Critter c
 	}

@@ -41,7 +41,7 @@ public class Arithmetic extends Binary<Expression, Arithmetic.Op> implements
 	}
             
     @Override
-    public int eval(/*Critter c*/) {
+    public int eval() {
         // TODO implement me!
         // returns the boolean value of this expression for Critter c
     }

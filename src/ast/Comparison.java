@@ -47,7 +47,7 @@ public class Comparison extends Binary<Expression, Comparison.Op> implements
 	}
             
     @Override
-    public boolean eval(/*Critter c*/) {
+    public boolean eval() {
         // TODO implement me!
         // returns the boolean value of this condition for Critter c
     }

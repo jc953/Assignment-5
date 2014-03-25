@@ -14,9 +14,9 @@ public class UnaryExpr extends Unary<UnaryExpr.Op> implements Expression {
 	public UnaryExpr(Op op, Expression expr) {
 		super(op, expr);
 	}
-    
-    @Override
-	public int eval(/*Critter c*/) {
+
+	@Override
+	public int eval() {
 		// TODO implement me!
 		// returns the value of this expression for Critter c
 	}

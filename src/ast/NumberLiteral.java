@@ -12,12 +12,12 @@ public class NumberLiteral extends AbstractNode implements Expression {
 	public NumberLiteral(int val) {
 		this.val = val;
 	}
-    
-    @Override
-	public int eval(/*Critter c*/) {
+
+	@Override
+	public int eval() {
 		return val;
 	}
-    
+
 	@Override
 	public int size() {
 		return 1;
