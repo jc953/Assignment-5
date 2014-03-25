@@ -17,6 +17,11 @@ public class Hex {
 		critter = c;
 	}
 	
+	public boolean isFree(){
+		return (!rock && critter==null);
+	}
+	
+	
 	public String getInfo(){
 		if (rock){
 			return "# ";
