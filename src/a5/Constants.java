@@ -24,7 +24,7 @@ public class Constants {
 	static int INITIAL_ENERGY;
 	static int MIN_MEMORY;
 	
-	public Constants(String file){
+	public static void read(String file){
 		try{
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 			String line = br.readLine();
