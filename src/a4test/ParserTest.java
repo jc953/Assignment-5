@@ -15,13 +15,13 @@ public class ParserTest {
 		Reader r = new StringReader("3 < 5 --> forward");
 		StringBuffer sb = new StringBuffer();
 		p.parse(r).prettyPrint(sb);
-		System.out.println(sb);
-		assertTrue(sb.equals("3 < 5 --> forward ;"));
+		assertTrue(sb.toString().equals("3 < 5 --> forward ;"));
 		
 		r = new StringReader("3 * 3 > 8 + 9 --> tag [ 3 ]");
 		sb = new StringBuffer();
 		p.parse(r).prettyPrint(sb);
-		assertTrue(p.parse(r).toString()=="3 * 3 > 8 + 9 --> tag [ 3 ]");
+		//System.out.println(sb);
+		assertTrue(sb.toString().equals("3 * 3 > 8 + 9 --> tag [ 3 ] ;"));
 		
 		r = new StringReader("3 + 3 * 5 or 34 > 7 --> mem[6] := 12 + 7 wait");
 		sb = new StringBuffer();
