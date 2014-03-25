@@ -21,9 +21,9 @@ public class Hex {
 		if (rock){
 			return "# ";
 		} else if (critter != null && food > 0){
-			return "G" + Integer.parseInt(critter.direction);
+			return "G" + critter.direction;
 		} else if (critter != null){
-			return "C" + Integer.parseInt(critter.direction);
+			return "C" + critter.direction;
 		} else if (food > 0){
 			return "F ";
 		} else {
