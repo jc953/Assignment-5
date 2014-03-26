@@ -11,11 +11,21 @@ public class Critter {
 	int nextColumn;
 	int nextRow;
 	
-	public Critter(String file, int direction, CritterWorld critterworld){
+	public Critter(String file, int direction, int column, int row, CritterWorld critterworld){
 		//give rules to the critter 
 		//parseFile();
 		this.direction = direction;
 		this.critterworld = critterworld;
+		this.column = column;
+		this.row = row;
+		switch(direction){
+			case 0: nextColumn = column; nextRow = row +1;
+			case 1: nextColumn = column; nextRow = row +1;
+			case 2: nextColumn = column; nextRow = row +1;
+			case 3: nextColumn = column; nextRow = row +1;
+			case 4: nextColumn = column; nextRow = row +1;
+			case 5: nextColumn = column; nextRow = row +1;
+		}
 	}
 	
 	public void step(){
