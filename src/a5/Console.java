@@ -1,5 +1,6 @@
 package a5;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /** The console user interface for Assignment 5. */
@@ -10,7 +11,7 @@ public class Console {
 
 	public static void main(String[] args) {
 		Console console = new Console();
-		Constants.read("constants.txt");
+		Constants.read("src/constants.txt");
 		
 		while (!done) {
 			System.out.println("Enter a command or \"help\" for a list of commands.");
@@ -69,7 +70,7 @@ public class Console {
      * Starts new random world simulation
      */
     private void newWorld() {
-    	//TODO implement
+    	cw = new CritterWorld();
     }
     
     /**
@@ -77,7 +78,11 @@ public class Console {
      * @param filename
      */
     private void loadWorld(String filename) {
-    	//TODO implement
+    	try {
+			cw = new CritterWorld(filename);
+		} catch (FileNotFoundException e) {
+			System.out.println("No such file");
+		}
     }
     
     /**

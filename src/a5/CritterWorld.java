@@ -33,9 +33,22 @@ public class CritterWorld {
 			}
 			br.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("No file found");
 		}
+	}
+	
+	public CritterWorld(){
+		hexes = new Hex[Constants.MAX_COLUMN][Constants.MAX_ROW-Constants.MAX_COLUMN/2];
+		for (int i = 0; i < hexes.length; i++){
+			for (int j = 0; j < hexes[0].length; j++){
+				hexes[i][j] = new Hex();
+			}
+		}
+		critters = new ArrayList<Critter>();
+		steps = 0;
+		
+		//Add Random Rocks
+		
 	}
 	
 	public void createRock(String line){
