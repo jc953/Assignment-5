@@ -3,9 +3,6 @@ package a5;
 import java.io.*;
 import java.util.ArrayList;
 
-import ast.*;
-import parse.*;
-
 public class CritterWorld {
 	Hex[][] hexes;
 	ArrayList<Critter> critters;
@@ -13,6 +10,13 @@ public class CritterWorld {
 	
 	public CritterWorld(String file) throws FileNotFoundException{
 		hexes = new Hex[Constants.MAX_COLUMN][Constants.MAX_ROW-Constants.MAX_COLUMN/2];
+		for (int i = 0; i < hexes.length; i++){
+			for (int j = 0; j < hexes[0].length; j++){
+				hexes[i][j] = new Hex();
+			}
+		}
+		critters = new ArrayList<Critter>();
+		steps = 0;
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 			String line = br.readLine();
@@ -55,8 +59,9 @@ public class CritterWorld {
 		int row = Integer.parseInt(str[2]);
 		int column = Integer.parseInt(str[3]);
 		int arrayRow = row - ((column+1)/2);
-		Critter c = new Critter(str[1], Integer.parseInt(str[4]), int column, int row, this);
+		Critter c = new Critter(str[1], Integer.parseInt(str[4]), column, arrayRow, this);
 		hexes[column][arrayRow].setCritter(c);
+		critters.add(c);
 	}
 	
 	public void step(){
@@ -74,7 +79,16 @@ public class CritterWorld {
 				System.out.println(hexes[0][i].getInfo()+"\n");
 			}
 		}
-		//DO THIS SHIT
+		for (int i = hexes[0].length-1; i >= 0; i--){
+			for (int j = 1; j < hexes.length; j += 2){
+				System.out.print("  "+hexes[j][i].getInfo());
+			}
+			System.out.println();
+			for (int j = 0; j < hexes.length; j += 2){
+				System.out.print(hexes[j][i].getInfo()+"  ");
+			}
+			System.out.println();
+		}
 	}
 	
 	public void kill(Critter c){

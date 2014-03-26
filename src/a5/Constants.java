@@ -34,51 +34,53 @@ public class Constants {
 				for(;line.charAt(i) != ' ';i++){
 					constant = constant + line.charAt(i);
 				}
+				i++;
 				String value = "";
 				for(;line.charAt(i) != ' ';i++){
 					value = value + line.charAt(i);
 				}
 				switch(constant){
-				case "BASE_DAMAGE": BASE_DAMAGE = new Integer(value);
+				case "BASE_DAMAGE": BASE_DAMAGE = Integer.parseInt(value);
 					break;
-				case "DAMAGE_INC": DAMAGE_INC = new Double(value);
+				case "DAMAGE_INC": DAMAGE_INC = Double.parseDouble(value);
 					break;
-				case "ENERGY_PER_SIZE": ENERGY_PER_SIZE = new Integer(value);
+				case "ENERGY_PER_SIZE": ENERGY_PER_SIZE = Integer.parseInt(value);
 					break;
-				case "FOOD_PER_SIZE": FOOD_PER_SIZE = new Integer(value);
+				case "FOOD_PER_SIZE": FOOD_PER_SIZE = Integer.parseInt(value);
 					break;
-				case "MAX_SMELL_DISTANCE": MAX_SMELL_DISTANCE = new Integer(value);
+				case "MAX_SMELL_DISTANCE": MAX_SMELL_DISTANCE = Integer.parseInt(value);
 					break;
-				case "ROCK_VALUE": ROCK_VALUE = new Integer(value);
+				case "ROCK_VALUE": ROCK_VALUE = Integer.parseInt(value);
 					break;
-				case "MAX_COLUMN": MAX_COLUMN = new Integer(value);
+				case "MAX_COLUMN": MAX_COLUMN = Integer.parseInt(value);
 					break;
-				case "MAX_ROW": MAX_ROW = new Integer(value);
+				case "MAX_ROW": MAX_ROW = Integer.parseInt(value);
 					break;
-				case "MAX_RULES_PER_TURN": MAX_RULES_PER_TURN = new Integer(value);
+				case "MAX_RULES_PER_TURN": MAX_RULES_PER_TURN = Integer.parseInt(value);
 					break;
-				case "SOLAR_FLUX": SOLAR_FLUX = new Integer(value);
+				case "SOLAR_FLUX": SOLAR_FLUX = Integer.parseInt(value);
 					break;
-				case "MOVE_COST": MOVE_COST = new Integer(value);
+				case "MOVE_COST": MOVE_COST = Integer.parseInt(value);
 					break;
-				case "ATTACK_COST": ATTACK_COST = new Integer(value);
+				case "ATTACK_COST": ATTACK_COST = Integer.parseInt(value);
 					break;
-				case "GROW_COST": GROW_COST = new Integer(value);
+				case "GROW_COST": GROW_COST = Integer.parseInt(value);
 					break;
-				case "BUD_COST": BUD_COST = new Integer(value);
+				case "BUD_COST": BUD_COST = Integer.parseInt(value);
 					break;
-				case "MATE_COST": MATE_COST = new Integer(value);
+				case "MATE_COST": MATE_COST = Integer.parseInt(value);
 					break;
-				case "RULE_COST": RULE_COST = new Integer(value);
+				case "RULE_COST": RULE_COST = Integer.parseInt(value);
 					break;
-				case "ABILITY_COST": ABILITY_COST = new Integer(value);
+				case "ABILITY_COST": ABILITY_COST = Integer.parseInt(value);
 					break;
-				case "INITIAL_ENERGY": INITIAL_ENERGY = new Integer(value);
+				case "INITIAL_ENERGY": INITIAL_ENERGY = Integer.parseInt(value);
 					break;
-				case "MIN_MEMORY": MIN_MEMORY = new Integer(value);
+				case "MIN_MEMORY": MIN_MEMORY = Integer.parseInt(value);
 					break;
 				default: throw new FileNotFoundException();
 				}
+				line = br.readLine();
 			}
 			br.close();
 		}
