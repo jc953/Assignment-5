@@ -180,7 +180,7 @@ public class Critter {
 		}
 		else{
 			mem[4] -= Constants.BUD_COST;
-			Program temp = //dup;
+				Program temp = //dup;
 			Mutation.mutate(temp);
 			critterworld.hexes[previousColumn][previousRow].setCritter(new Critter());
 			return true;
