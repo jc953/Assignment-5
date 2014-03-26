@@ -80,6 +80,15 @@ public class CritterWorld {
 		critters.add(c);
 	}
 	
+	public void addRandomCritter(String filename){
+		int col = (int)(Math.random() * hexes.length);
+		int row = (int)(Math.random() * hexes[0].length);
+		Critter c = new Critter(filename, 0, col, row, this);
+		hexes[col][row].setCritter(c);
+		critters.add(c);
+		
+	}
+	
 	public void step(){
 		for (Critter c : critters){
 			c.step();
@@ -92,16 +101,16 @@ public class CritterWorld {
 		System.out.println(critters.size() + " critters are alive.");
 		if (hexes.length == 1){
 			for (int i = hexes[0].length-1; i >= 0; i--){
-				System.out.println(hexes[0][i].getInfo()+"\n");
+				System.out.println(hexes[0][i].getWorldInfo()+"\n");
 			}
 		}
 		for (int i = hexes[0].length-1; i >= 0; i--){
 			for (int j = 1; j < hexes.length; j += 2){
-				System.out.print("  "+hexes[j][i].getInfo());
+				System.out.print("  "+hexes[j][i].getWorldInfo());
 			}
 			System.out.println();
 			for (int j = 0; j < hexes.length; j += 2){
-				System.out.print(hexes[j][i].getInfo()+"  ");
+				System.out.print(hexes[j][i].getWorldInfo()+"  ");
 			}
 			System.out.println();
 		}

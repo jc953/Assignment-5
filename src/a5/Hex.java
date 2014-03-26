@@ -25,7 +25,7 @@ public class Hex {
 		return (!rock && critter==null);
 	}
 	
-	public String getInfo(){
+	public String getWorldInfo(){
 		if (rock){
 			return "# ";
 		} else if (critter != null && food > 0){
@@ -37,5 +37,10 @@ public class Hex {
 		} else {
 			return "- ";
 		}
+	}
+	
+	public String getInfo(){
+		return "";
+		// IMPLEMENT THISSSSS
 	}
 }

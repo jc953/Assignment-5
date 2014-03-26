@@ -92,7 +92,9 @@ public class Console {
      * @param n
      */
     private void loadCritters(String filename, int n) {
-    	//TODO implement
+    	for (int i = 0; i < n; i ++){
+    		cw.addRandomCritter(filename);
+    	}
     }
     
     /**
@@ -100,7 +102,9 @@ public class Console {
      * @param n
      */
     private void advanceTime(int n) {
-    	//TODO implement
+    	for (int i = 0; i < n; i++){
+    		cw.step();
+    	}
     }
     
     /**
@@ -117,7 +121,8 @@ public class Console {
      * @param r row of hex
      */
     private void hexInfo(int c, int r) {
-    	//TODO implement
+    	int arrayRow = r - ((c+1)/2);
+    	System.out.println(cw.hexes[c][arrayRow].getInfo());
     }
 
     /**
