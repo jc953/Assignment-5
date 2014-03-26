@@ -4,8 +4,8 @@ import java.io.FileNotFoundException;
 
 public class test {
 	public static void main(String[] args) throws FileNotFoundException{
-		Constants.read("constants.txt");
-		CritterWorld cw = new CritterWorld("C:\\Users\\one80_000\\world.txt");
+		Constants.read("src/constants.txt");
+		CritterWorld cw = new CritterWorld("src/world.txt");
 		cw.info();
 	}
 }

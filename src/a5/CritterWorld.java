@@ -46,9 +46,12 @@ public class CritterWorld {
 		}
 		critters = new ArrayList<Critter>();
 		steps = 0;
-		
-		//Add Random Rocks
-		
+		int numberRocks = hexes.length*hexes[0].length/10;
+		for (int i = 0; i < numberRocks; i++){
+			int col = (int)(Math.random() * hexes.length);
+			int row = (int)(Math.random() * hexes[0].length);
+			hexes[col][row].setRock();
+		}
 	}
 	
 	public void createRock(String line){

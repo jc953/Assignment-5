@@ -108,7 +108,7 @@ public class Console {
      * map of the simulation
      */
     private void worldInfo() {
-    	//TODO implement
+    	cw.info();
     }
     
     /**
