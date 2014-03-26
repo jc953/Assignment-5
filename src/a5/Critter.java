@@ -78,30 +78,31 @@ public class Critter {
 		}
 	}
 	
-	public boolean move(int forOrBack){
+	public void move(int forOrBack){
 		assert (forOrBack==-1 || forOrBack==1);
 		if(Constants.MOVE_COST>=mem[4]){
-			return false;
+			critterworld.kill(this);
+			return;
 		}
 		mem[4] -= Constants.MOVE_COST;
 		if (forOrBack==-1){
 			if(!critterworld.hexes[previousColumn][previousRow].isFree()){
-				return false;
+				return;
 			}
 			else {
 				setPosition(previousColumn, previousRow);
 				critterworld.hexes[previousColumn][previousRow].setCritter(this);
-				return true;
+				return;
 			}
 		}
 		else{
 			if(!critterworld.hexes[nextColumn][nextRow].isFree()){
-				return false;
+				return;
 			}
 			else {
 				setPosition(nextColumn, nextRow);
 				critterworld.hexes[previousColumn][previousRow].setCritter(this);
-				return true;
+				return;
 			}
 		}
 	}
@@ -159,24 +160,27 @@ public class Critter {
 		}
 	}
 	
-	public boolean grow(){
+	public void grow(){
 		if (Constants.GROW_COST>=mem[4]){
-			return false;
+			critterworld.kill(this);
+			return;
 		}
 		else{
 			mem[3]++;
 			mem[4] -= Constants.GROW_COST;
-			return true;
 		}
 	}
 	
 	public boolean bud(){
+		//if its greater kill it without child
+		//if its less, normal
+		//if its equal kill it with child
 		if (Constants.BUD_COST>=mem[4]||!critterworld.hexes[previousColumn][previousRow].isFree()){
 			return false;
 		}
 		else{
 			mem[4] -= Constants.BUD_COST;
-			Program temp = new Program(program.);
+			Program temp = //dup;
 			Mutation.mutate(temp);
 			critterworld.hexes[previousColumn][previousRow].setCritter(new Critter());
 			return true;
