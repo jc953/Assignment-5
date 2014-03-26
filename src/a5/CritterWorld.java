@@ -55,7 +55,7 @@ public class CritterWorld {
 		int row = Integer.parseInt(str[2]);
 		int column = Integer.parseInt(str[3]);
 		int arrayRow = row - ((column+1)/2);
-		Critter c = new Critter(str[1], Integer.parseInt(str[4]), this);
+		Critter c = new Critter(str[1], Integer.parseInt(str[4]), int column, int row, this);
 		hexes[column][arrayRow].setCritter(c);
 	}
 	
@@ -75,5 +75,14 @@ public class CritterWorld {
 			}
 		}
 		//DO THIS SHIT
+	}
+	
+	public void kill(Critter c){
+		int column = c.column;
+		int row = c.row;
+		critters.remove(c);
+		hexes[column][row].setCritter(null);
+		hexes[column][row].setFood(c.mem[3]*Constants.FOOD_PER_SIZE);
+		
 	}
 }

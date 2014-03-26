@@ -17,10 +17,13 @@ public class Hex {
 		critter = c;
 	}
 	
+	public void setFood(int i){
+		food = i;
+	}
+	
 	public boolean isFree(){
 		return (!rock && critter==null);
 	}
-	
 	
 	public String getInfo(){
 		if (rock){
