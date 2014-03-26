@@ -68,7 +68,7 @@ public class Critter {
 	
 	
 	public void attacked(Critter attacker){
-		double p = 1.0/(1.0+Math.E.pow(-Constants.DAMAGE_INC*(attacker.mem[3]*attacker.mem[2]-mem[3]*mem[1])));
+		double p = 1.0/(1.0+Math.pow(Math.E, -Constants.DAMAGE_INC*(attacker.mem[3]*attacker.mem[2]-mem[3]*mem[1])));
 		if (Constants.BASE_DAMAGE*attacker.mem[3]*p>=mem[4]){
 			critterworld.kill(this);
 		}
