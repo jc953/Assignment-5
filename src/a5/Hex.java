@@ -39,8 +39,18 @@ public class Hex {
 		}
 	}
 	
-	public String getInfo(){
-		return "";
-		// IMPLEMENT THISSSSS
+	public void getInfo(){
+		if (rock){
+			System.out.println("This hex contains a rock.");
+			return;
+		}
+		if (critter != null) {
+			critter.getInfo();
+		}
+		if (food > 0){
+			System.out.println("This hex contains " + food + " food.");
+		} else {
+			System.out.println("This hex does not contain food.");
+		}
 	}
 }

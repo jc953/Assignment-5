@@ -86,7 +86,6 @@ public class CritterWorld {
 		Critter c = new Critter(filename, 0, col, row, this);
 		hexes[col][row].setCritter(c);
 		critters.add(c);
-		
 	}
 	
 	public void step(){
@@ -122,6 +121,5 @@ public class CritterWorld {
 		critters.remove(c);
 		hexes[column][row].setCritter(null);
 		hexes[column][row].setFood(c.mem[3]*Constants.FOOD_PER_SIZE);
-		
 	}
 }

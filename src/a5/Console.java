@@ -122,7 +122,7 @@ public class Console {
      */
     private void hexInfo(int c, int r) {
     	int arrayRow = r - ((c+1)/2);
-    	System.out.println(cw.hexes[c][arrayRow].getInfo());
+    	cw.hexes[c][arrayRow].getInfo();
     }
 
     /**
