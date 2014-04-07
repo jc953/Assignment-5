@@ -8,7 +8,7 @@ public class Critter {
 	CritterWorld critterworld;
 	Program program;
 	Rule lastRule;
-	int[] mem;
+	public int[] mem;
 	int direction;
 	int column;
 	int row;
@@ -16,6 +16,7 @@ public class Critter {
 	int nextRow;
 	int previousColumn;
 	int previousRow;
+	int appearance;
 	
 	public Critter(String file, int direction, int column, int row, CritterWorld critterworld){
 		try {
@@ -199,6 +200,25 @@ public class Critter {
 		}
 	}
 	
+	
+	public int nearby(int dir){
+		dir = dir%6;
+		int ans=0;
+		for(int i=0;i<Math.abs(dir);i++){
+			turn(dir/(Math.abs(dir)));
+		}
+		Hex hex = critterworld.hexes[nextColumn][nextRow];
+		if (hex.critter==null && !hex.rock && hex.food==0){
+			ans = 0;
+		}
+		if(hex.rock) ans = -1;
+		if(hex.food>0) ans = -(hex.food+1);
+		if(hex.critter != null) ans = hex.critter.appearance;
+		for(int i=0;i<Math.abs(dir);i++){
+			turn(-dir/(Math.abs(dir)));
+		}
+		return ans;
+	}
 	public void getInfo(){
 		System.out.println("This hex contains a critter.");
 		System.out.println("MEMSIZE : " + mem[0]);

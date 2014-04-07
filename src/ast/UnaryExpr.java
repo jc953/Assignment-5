@@ -19,8 +19,12 @@ public class UnaryExpr extends Unary<UnaryExpr.Op> implements Expression {
 
 	@Override
 	public int eval(Critter c) {
-		// TODO implement me!
-		// returns the value of this expression for Critter c
+		switch (op){
+		case MEM: return c.mem[expr.eval(c)];
+		case NEARBY: return c.nearby(expr.eval(c));
+		case AHEAD: return c.ahead(expr.eval(c));
+		case RANDOM: return (int)Math.random()*(expr.eval(c)-1); 
+		}
 	}
 
 	@Override
