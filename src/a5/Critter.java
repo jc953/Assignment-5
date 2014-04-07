@@ -219,6 +219,11 @@ public class Critter {
 		}
 		return ans;
 	}
+	
+	public int ahead(int dist){
+		
+		
+	}
 	public void getInfo(){
 		System.out.println("This hex contains a critter.");
 		System.out.println("MEMSIZE : " + mem[0]);
