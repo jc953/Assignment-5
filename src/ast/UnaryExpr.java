@@ -1,5 +1,7 @@
 package ast;
 
+import a5.Critter;
+
 public class UnaryExpr extends Unary<UnaryExpr.Op> implements Expression {
 
 	public enum Op {
@@ -16,7 +18,7 @@ public class UnaryExpr extends Unary<UnaryExpr.Op> implements Expression {
 	}
 
 	@Override
-	public int eval() {
+	public int eval(Critter c) {
 		// TODO implement me!
 		// returns the value of this expression for Critter c
 	}

@@ -1,5 +1,7 @@
 package ast;
 
+import a5.Critter;
+
 /**
  * A representation of a binary Boolean condition: 'and' or 'or'
  */
@@ -25,7 +27,7 @@ public class Logical extends Binary<Condition, Logical.Op> implements Condition 
 	}
     
     @Override
-	public boolean eval() {
+	public boolean eval(Critter c) {
 		// TODO implement me!
 		// returns the boolean value of this condition for Critter c
 	}

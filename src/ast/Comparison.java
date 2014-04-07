@@ -1,5 +1,7 @@
 package ast;
 
+import a5.Critter;
+
 public class Comparison extends Binary<Expression, Comparison.Op> implements
 		Condition {
 
@@ -47,7 +49,7 @@ public class Comparison extends Binary<Expression, Comparison.Op> implements
 	}
             
     @Override
-    public boolean eval() {
+    public boolean eval(Critter c) {
         // TODO implement me!
         // returns the boolean value of this condition for Critter c
     }

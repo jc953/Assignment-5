@@ -2,6 +2,7 @@ package ast;
 
 import java.util.List;
 
+import a5.Critter;
 import util.F;
 import util.Utils;
 
@@ -14,7 +15,7 @@ public class NumberLiteral extends AbstractNode implements Expression {
 	}
 
 	@Override
-	public int eval() {
+	public int eval(Critter c) {
 		return val;
 	}
 

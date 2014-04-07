@@ -1,11 +1,13 @@
 package a5;
 import java.io.*;
+
 import parse.*;
 import ast.*;
 
 public class Critter {
 	CritterWorld critterworld;
 	Program program;
+	Rule lastRule;
 	int[] mem;
 	int direction;
 	int column;
@@ -195,5 +197,25 @@ public class Critter {
 		if (direction + critterworld.hexes[nextColumn][nextRow].getCritter().direction == 5){
 		
 		}
+	}
+	
+	public void getInfo(){
+		System.out.println("This hex contains a critter.");
+		System.out.println("MEMSIZE : " + mem[0]);
+		System.out.println("DEFENSE : " + mem[1]);
+		System.out.println("OFFENSE : " + mem[2]);
+		System.out.println("SIZE : " + mem[3]);
+		System.out.println("ENERGY : " + mem[4]);
+		System.out.println("PASS : " + mem[5]);
+		System.out.println("TAG : " + mem[6]);
+		System.out.println("POSTURE : " + mem[7]);
+		for (int i = 8; i < mem.length; i++){
+			System.out.println("mem["+i+"] : "+ mem[i]);
+		}
+		StringBuffer sb = new StringBuffer();
+		program.prettyPrint(sb);
+		System.out.println(sb);
+		lastRule.prettyPrint(sb);
+		System.out.println(sb);
 	}
 }
