@@ -30,6 +30,10 @@ public class Critter {
 		}
 	}
 	
+	public Critter(){
+		
+	}
+	
 	public void step(){
 		mem[5]=1;
 		
