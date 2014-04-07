@@ -23,7 +23,7 @@ public class UnaryExpr extends Unary<UnaryExpr.Op> implements Expression {
 		case MEM: return c.mem[expr.eval(c)];
 		case NEARBY: return c.nearby(expr.eval(c));
 		case AHEAD: return c.ahead(expr.eval(c));
-		case RANDOM: return (int)Math.random()*(expr.eval(c)-1); 
+		case RANDOM: return (int)(Math.random()*(expr.eval(c))); 
 		}
 	}
 
