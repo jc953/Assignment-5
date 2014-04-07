@@ -30,7 +30,7 @@ public class ParserImpl implements Parser {
 	 * @throws SyntaxError
 	 *             if there the input tokens have invalid syntax
 	 */
-	private Program program1() {
+	private Program program() {
 		List<Rule> rules = new ArrayList<Rule>();
 		while (tokenizer.hasNext()) {
 			Rule rule = rule();
