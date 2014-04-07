@@ -50,8 +50,29 @@ public class Comparison extends Binary<Expression, Comparison.Op> implements
             
     @Override
     public boolean eval(Critter c) {
-        // TODO implement me!
-        // returns the boolean value of this condition for Critter c
+        int l = left.eval(c);
+        int r = right.eval(c);
+        switch (op) {
+        case LT: 
+        	if (l < r)
+        		return true;
+        case LE: 
+        	if (l <= r)
+        		return true;
+        case EQ: 
+        	if (l == r)
+        		return true;
+        case GE: 
+        	if (l >= r)
+        		return true;
+        case GT: 
+        	if (l > r)
+        		return true;
+        case NE: 
+        	if (l != r)
+        		return true;
+        }
+        return false;
     }
 
 	@Override
