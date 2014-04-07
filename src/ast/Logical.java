@@ -28,8 +28,17 @@ public class Logical extends Binary<Condition, Logical.Op> implements Condition 
     
     @Override
 	public boolean eval(Critter c) {
-		// TODO implement me!
-		// returns the boolean value of this condition for Critter c
+    	boolean l = left.eval(c);
+    	boolean r = right.eval(c);
+    	switch (op){
+    	case OR:
+    		if (l || r)
+    			return true;
+    	case AND:
+    		if (l && r)
+    			return true;
+    	}
+    	return false;
 	}
     
     

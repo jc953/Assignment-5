@@ -44,8 +44,22 @@ public class Arithmetic extends Binary<Expression, Arithmetic.Op> implements
             
     @Override
     public int eval(Critter c) {
-        // TODO implement me!
-        // returns the boolean value of this expression for Critter c
+    	int l = left.eval(c);
+        int r = right.eval(c);
+        switch (op) {
+        case PLUS: 
+        	return l+r;
+        case MINUS: 
+        	return l-r;
+        case MUL: 
+        	return l*r;
+        case DIV: 
+         	return l/r;
+        case MOD:
+        	return l%r;
+        default:
+        	return 0;
+        }
     }
             
 	@Override
