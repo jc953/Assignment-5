@@ -25,13 +25,13 @@ public class Hex {
 		return (!rock && critter==null);
 	}
 	
-	public int determineContents(){
+	public int determineContents(boolean ignoreCritter){
 		if (critter==null && !rock && food==0){
 			return 0;
 		}
 		if(rock) return -1;
-		else if(food>0) return -(food+1);
-		else return critter.appearance;
+		else if(critter != null && !ignoreCritter) return critter.appearance;
+		else return -(food+1);
 	}
 	
 	public String getWorldInfo(){
