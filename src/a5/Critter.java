@@ -200,30 +200,30 @@ public class Critter {
 		}
 	}
 	
-	
 	public int nearby(int dir){
 		dir = dir%6;
-		int ans=0;
-		for(int i=0;i<Math.abs(dir);i++){
+		for(int i=1;i<Math.abs(dir);i++){
 			turn(dir/(Math.abs(dir)));
 		}
-		Hex hex = critterworld.hexes[nextColumn][nextRow];
-		if (hex.critter==null && !hex.rock && hex.food==0){
-			ans = 0;
-		}
-		if(hex.rock) ans = -1;
-		if(hex.food>0) ans = -(hex.food+1);
-		if(hex.critter != null) ans = hex.critter.appearance;
-		for(int i=0;i<Math.abs(dir);i++){
+		int ans=critterworld.hexes[row][column].determineContents();
+		for(int i=1;i<Math.abs(dir);i++){
 			turn(-dir/(Math.abs(dir)));
 		}
 		return ans;
 	}
 	
 	public int ahead(int dist){
-		
-		
+		if (dist==0) return this.appearance;
+		for (int i=1;i<Math.abs(dist);i++){
+			move(1);
+		}
+		int ans=critterworld.hexes[row][column].determineContents();
+		for (int i=1;i<Math.abs(dist);i++){
+			move(-1);
+		}
+		return ans;
 	}
+	
 	public void getInfo(){
 		System.out.println("This hex contains a critter.");
 		System.out.println("MEMSIZE : " + mem[0]);
