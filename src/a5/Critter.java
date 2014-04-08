@@ -16,13 +16,14 @@ public class Critter {
 	int nextRow;
 	int previousColumn;
 	int previousRow;
-	int appearance;
 	
 	public Critter(String file, int direction, int column, int row, CritterWorld critterworld){
 		try {
 			BufferedReader br =  new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 			ParserImpl p = new ParserImpl();
 			program = p.parse(br);
+			//we need to initialize mem
+			//what is lastRule?
 			this.direction = direction;
 			this.critterworld = critterworld;
 			setPosition(column,row);
@@ -33,8 +34,15 @@ public class Critter {
 		}
 	}
 	
-	public Critter(){
-		
+	public Critter(Program program, int column, int row){
+		mem[4] = Constants.INITIAL_ENERGY;
+		mem[3] = 1;
+		mem[6] = 0;
+		mem[7] = 0;
+		this.program = program;
+		setPosition(column, row);
+		//need to handle lastRule
+		//need to handle memory locations above 8
 	}
 	
 	public void step(){
@@ -97,8 +105,9 @@ public class Critter {
 				return;
 			}
 			else {
-				setPosition(previousColumn, previousRow);
 				critterworld.hexes[previousColumn][previousRow].setCritter(this);
+				setPosition(previousColumn, previousRow);
+				critterworld.hexes[nextColumn][nextRow].critter=null;
 				return;
 			}
 		}
@@ -107,8 +116,9 @@ public class Critter {
 				return;
 			}
 			else {
+				critterworld.hexes[nextColumn][nextRow].setCritter(this);
 				setPosition(nextColumn, nextRow);
-				critterworld.hexes[previousColumn][previousRow].setCritter(this);
+				critterworld.hexes[previousColumn][previousRow].critter=null;
 				return;
 			}
 		}
@@ -179,17 +189,18 @@ public class Critter {
 	}
 	
 	public boolean bud(){
-		//if its greater kill it without child
-		//if its less, normal
-		//if its equal kill it with child
-		if (Constants.BUD_COST>=mem[4]||!critterworld.hexes[previousColumn][previousRow].isFree()){
+		if (!critterworld.hexes[previousColumn][previousRow].isFree()){
 			return false;
+		}
+		if (Constants.BUD_COST>mem[4] && critterworld.hexes[previousColumn][previousRow].isFree()){
+			critterworld.kill(this);
 		}
 		else{
 			mem[4] -= Constants.BUD_COST;
-				Program temp = //dup;
+			Program temp = program.dup(lastRule);
 			Mutation.mutate(temp);
-			critterworld.hexes[previousColumn][previousRow].setCritter(new Critter());
+			critterworld.hexes[previousColumn][previousRow].setCritter(new Critter(temp, previousRow, previousColumn));
+			if (mem[4]==0) critterworld.kill(this);
 			return true;
 		}
 	}
@@ -210,7 +221,7 @@ public class Critter {
 	}
 	
 	public int ahead(int dist){
-		if (dist==0) return this.appearance;
+		if (dist==0) return this.mem[7];
 		if (dist==-1) return critterworld.hexes[row][column].determineContents(true);
 		if (dist<-1) dist = -dist-1;
 		for (int i=1;i<Math.abs(dist);i++){

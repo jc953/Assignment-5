@@ -30,7 +30,7 @@ public class Hex {
 			return 0;
 		}
 		if(rock) return -1;
-		else if(critter != null && !ignoreCritter) return critter.appearance;
+		else if(critter != null && !ignoreCritter) return critter.mem[7];
 		else return -(food+1);
 	}
 	
