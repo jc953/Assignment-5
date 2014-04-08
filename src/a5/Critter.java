@@ -201,25 +201,24 @@ public class Critter {
 	}
 	
 	public int nearby(int dir){
-		dir = dir%6;
-		for(int i=1;i<Math.abs(dir);i++){
-			turn(dir/(Math.abs(dir)));
-		}
-		int ans=critterworld.hexes[nextRow][nextColumn].determineContents();
-		for(int i=1;i<Math.abs(dir);i++){
-			turn(-dir/(Math.abs(dir)));
-		}
+		int originalDir = direction;
+		direction = (direction + dir) % 6;
+		setPosition(column, row);
+		int ans=critterworld.hexes[nextRow][nextColumn].determineContents(false);
+		direction = originalDir;
 		return ans;
 	}
 	
 	public int ahead(int dist){
 		if (dist==0) return this.appearance;
+		if (dist==-1) return critterworld.hexes[row][column].determineContents(true);
+		if (dist<-1) dist = -dist-1;
 		for (int i=1;i<Math.abs(dist);i++){
-			setPosition(row,column);
+			setPosition(nextRow,nextColumn);
 		}
-		int ans=critterworld.hexes[row][column].determineContents();
+		int ans=critterworld.hexes[row][column].determineContents(false);
 		for (int i=1;i<Math.abs(dist);i++){
-			setPosition(row,column);
+			setPosition(nextRow,nextColumn);
 		}
 		return ans;
 	}
