@@ -205,7 +205,7 @@ public class Critter {
 		for(int i=1;i<Math.abs(dir);i++){
 			turn(dir/(Math.abs(dir)));
 		}
-		int ans=critterworld.hexes[row][column].determineContents();
+		int ans=critterworld.hexes[nextRow][nextColumn].determineContents();
 		for(int i=1;i<Math.abs(dir);i++){
 			turn(-dir/(Math.abs(dir)));
 		}
@@ -215,11 +215,11 @@ public class Critter {
 	public int ahead(int dist){
 		if (dist==0) return this.appearance;
 		for (int i=1;i<Math.abs(dist);i++){
-			move(1);
+			setPosition(row,column);
 		}
 		int ans=critterworld.hexes[row][column].determineContents();
 		for (int i=1;i<Math.abs(dist);i++){
-			move(-1);
+			setPosition(row,column);
 		}
 		return ans;
 	}
