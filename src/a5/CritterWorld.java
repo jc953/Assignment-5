@@ -2,6 +2,7 @@ package a5;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CritterWorld {
 	Hex[][] hexes;
@@ -94,8 +95,11 @@ public class CritterWorld {
 	}
 	
 	public void step() throws InterruptedException{
-		for (Critter c : critters){
-			c.step();
+		ArrayList<Critter> tempCrits = new ArrayList<Critter>(critters);
+		for (Critter c : tempCrits){
+			if (c!=null){
+				c.step();
+			}
 		}
 		steps++;
 	}
