@@ -12,6 +12,7 @@ public class Constants {
 	static int ROCK_VALUE;
 	static int MAX_COLUMN;
 	static int MAX_ROW;
+	static int MAX_ARRAY_ROW;
 	static int MAX_RULES_PER_TURN;
 	static int SOLAR_FLUX;
 	static int MOVE_COST;
@@ -80,8 +81,10 @@ public class Constants {
 					break;
 				default: throw new FileNotFoundException();
 				}
+				
 				line = br.readLine();
 			}
+			MAX_ARRAY_ROW = MAX_ROW-MAX_COLUMN/2;
 			br.close();
 		}
 		catch(FileNotFoundException fnfe){
