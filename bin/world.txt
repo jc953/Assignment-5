@@ -3,6 +3,6 @@ rock 3 6
 rock 10 10
 critter src/wait-critter.txt 5 2 3
 critter src/move-critter.txt 4 3 1
-critter src/example-critter.txt 4 4 2
+critter src/grow-critter.txt 4 4 2
 critter src/example-critter.txt 10 9 4
 critter src/example-critter.txt 10 8 5
