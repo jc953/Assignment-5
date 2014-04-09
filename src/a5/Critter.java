@@ -228,7 +228,7 @@ public class Critter {
 	}
 	
 	public boolean validHex(int column, int row){
-		return column >= 0 && column < Constants.MAX_COLUMN && row >= 0 && row < Constants.MAX_ROW && critterworld.hexes[column][row].isFree();
+		return column >= 0 && column < Constants.MAX_COLUMN && row >= 0 && row < Constants.MAX_ARRAY_ROW && critterworld.hexes[column][row].isFree();
 	}
 	
 	public int getComplexity(){
