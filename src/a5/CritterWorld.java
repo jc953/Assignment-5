@@ -50,7 +50,7 @@ public class CritterWorld {
 		for (int i = 0; i < numberRocks; i++){
 			int col = (int)(Math.random() * hexes.length);
 			int row = (int)(Math.random() * hexes[0].length);
-			hexes[col][row].setRock();
+			hexes[col][row].rock = true;;
 		}
 	}
 	
@@ -63,7 +63,7 @@ public class CritterWorld {
 		int row = Integer.parseInt(str[1]);
 		int column = Integer.parseInt(str[2]);
 		int arrayRow = row - ((column+1)/2);
-		hexes[column][arrayRow].setRock();
+		hexes[column][arrayRow].rock = true;;
 	}
 	
 	public void createCritter(String line){
@@ -76,7 +76,7 @@ public class CritterWorld {
 		int column = Integer.parseInt(str[3]);
 		int arrayRow = row - ((column+1)/2);
 		Critter c = new Critter(str[1], Integer.parseInt(str[4]), column, arrayRow, this);
-		hexes[column][arrayRow].setCritter(c);
+		hexes[column][arrayRow].critter = c;;
 		critters.add(c);
 	}
 	
@@ -84,7 +84,7 @@ public class CritterWorld {
 		int col = (int)(Math.random() * hexes.length);
 		int row = (int)(Math.random() * hexes[0].length);
 		Critter c = new Critter(filename, 0, col, row, this);
-		hexes[col][row].setCritter(c);
+		hexes[col][row].critter = c;;
 		critters.add(c);
 	}
 	
@@ -119,7 +119,7 @@ public class CritterWorld {
 		int column = c.column;
 		int row = c.row;
 		critters.remove(c);
-		hexes[column][row].setCritter(null);
-		hexes[column][row].setFood(c.mem[3]*Constants.FOOD_PER_SIZE);
+		hexes[column][row].critter = null;
+		hexes[column][row].food = c.mem[3]*Constants.FOOD_PER_SIZE;
 	}
 }
