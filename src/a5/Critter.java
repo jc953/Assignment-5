@@ -14,6 +14,7 @@ public class Critter {
 	int direction;
 	int column;
 	int row;
+	boolean matePossible;
 
 	public Critter(String file, int direction, int column, int row, CritterWorld critterworld) {
 		try {
@@ -43,6 +44,7 @@ public class Critter {
 			this.column = column;
 			this.row = row;
 			lastRule = null;
+			matePossible = false;
 			br.close();
 		} catch (FileNotFoundException e) {
 			System.out.println("Error in producing a Critter.");
@@ -64,6 +66,7 @@ public class Critter {
 		this.row = row;
 		this.critterworld = critterworld;
 		lastRule = null;
+		matePossible = false;
 	}
 
 	public void step() {
@@ -302,11 +305,58 @@ public class Critter {
 		}
 	}
 
-	public boolean mate() {
-		if (direction
-				+ critterworld.hexes[nextColumn][nextRow].getCritter().direction == 5) {
 
+	public boolean mate(){
+		int [] pos = getAdjacentPositions(column, row);
+		boolean mate = false;
+		switch (direction){
+			case 0: 
+				if(critterworld.hexes[pos[0]][pos[1]].getCritter().direction == 3 
+				&& critterworld.hexes[pos[0]][pos[1]].getCritter().matePossible == true) mate = true;
+				break;
+			case 1: 
+				if(critterworld.hexes[pos[0]][pos[1]].getCritter().direction == 4 
+				&& critterworld.hexes[pos[0]][pos[1]].getCritter().matePossible == true) mate = true;
+				break;
+			case 2: 
+				if(critterworld.hexes[pos[0]][pos[1]].getCritter().direction == 5 
+				&& critterworld.hexes[pos[0]][pos[1]].getCritter().matePossible == true) mate = true;
+				break;
+			case 3: 
+				if(critterworld.hexes[pos[0]][pos[1]].getCritter().direction == 0 
+				&& critterworld.hexes[pos[0]][pos[1]].getCritter().matePossible == true) mate = true;
+				break;
+			case 4: 
+				if(critterworld.hexes[pos[0]][pos[1]].getCritter().direction == 1 
+				&& critterworld.hexes[pos[0]][pos[1]].getCritter().matePossible == true) mate = true;
+				break;
+			case 5: 
+				if(critterworld.hexes[pos[0]][pos[1]].getCritter().direction == 2 
+				&& critterworld.hexes[pos[0]][pos[1]].getCritter().matePossible == true) mate = true;
+				break;
 		}
+		
+		if (!mate){
+			matePossible = true;
+			return false;//Ask Jon
+		}
+		//do the energy mate cost thing here
+		int [] tempMem;
+		if (Math.random()<0.5){
+			tempMem = new int[mem[0]];
+		}
+		else{
+			tempMem = new int[critterworld.hexes[pos[0]][pos[1]].getCritter().mem[0]];
+		}
+		
+		while (Math.random() < 0.25){
+			if (Math.random() < 0.5) {
+				Mutation.mutate(tempProg);
+			} else {
+				tempMem = mutateAttributes(mem);
+			}
+		}
+		
 	}
 	
 	public int[] mutateAttributes(int[] mem){
