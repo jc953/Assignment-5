@@ -9,7 +9,7 @@ import java.util.*;
  */
 public class Program extends AbstractNode {
 
-	List<Rule> rules;
+	public List<Rule> rules;
 
 	Program() {
 		rules = new ArrayList<Rule>();
