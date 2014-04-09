@@ -126,8 +126,8 @@ public class Critter {
 							}
 						}
 						actionDone = true;
-						lastRule = r;
 					}
+					lastRule = r;
 					break;
 				}
 			}
@@ -227,6 +227,10 @@ public class Critter {
 		return result;
 	}
 	
+	public boolean validHex(int column, int row){
+		return column >= 0 && column < Constants.MAX_COLUMN && row >= 0 && row < Constants.MAX_ARRAY_ROW && critterworld.hexes[column][row].isFree();
+	}
+	
 	public int getComplexity(){
 		int a = program.rules.size() * Constants.RULE_COST;
 		int b = (mem[1]+mem[2]) * Constants.ABILITY_COST;
@@ -246,7 +250,7 @@ public class Critter {
 		mem[4] -= Constants.MOVE_COST;
 		int[] pos = getAdjacentPositions(column, row);
 		if (forOrBack == -1) {
-			if (!critterworld.hexes[pos[2]][pos[3]].isFree()) {
+			if (!validHex(pos[2], pos[3])){
 				return;
 			} else {
 				critterworld.hexes[column][row].critter = null;
@@ -256,7 +260,7 @@ public class Critter {
 				return;
 			}
 		} else {
-			if (!critterworld.hexes[pos[0]][pos[1]].isFree()) {
+			if (!validHex(pos[0], pos[1])){
 				return;
 			} else {
 				critterworld.hexes[column][row].critter = null;
@@ -304,6 +308,11 @@ public class Critter {
 
 	public void attack() {
 		int[] pos = getAdjacentPositions(column, row);
+		if (pos[0] < 0 || pos[0] > Constants.MAX_COLUMN){
+			return;
+		} else if (pos[1] < 0 || pos[1] > Constants.MAX_ARRAY_ROW){
+			return;
+		}
 		if (critterworld.hexes[pos[0]][pos[1]].critter != null) {
 			critterworld.hexes[pos[0]][pos[1]].critter.attacked(this);
 			mem[4] -= mem[3] * Constants.ATTACK_COST;
@@ -325,6 +334,11 @@ public class Critter {
 		assert (tagNumber <= 99 && tagNumber >= 0);
 		mem[4] -= mem[3];
 		int[] pos = getAdjacentPositions(column, row);
+		if (pos[0] < 0 || pos[0] > Constants.MAX_COLUMN){
+			return;
+		} else if (pos[1] < 0 || pos[1] > Constants.MAX_ARRAY_ROW){
+			return;
+		}
 		if (critterworld.hexes[pos[0]][pos[1]].critter != null) {
 			critterworld.hexes[pos[0]][pos[1]].critter.mem[6] = tagNumber;
 		}
@@ -347,7 +361,7 @@ public class Critter {
 			return false;
 		}
 		int[] pos = getAdjacentPositions(column, row);
-		if (!critterworld.hexes[pos[2]][pos[3]].isFree()) {
+		if (!validHex(pos[2], pos[3])){
 			return false;
 		} else {
 			Program tempProg = program.dup(program);
@@ -390,15 +404,17 @@ public class Critter {
 			int babyCol;
 			int babyRow;
 			int babyDir;
-			if (!critterworld.hexes[pos[2]][pos[3]].isFree() && !critterworld.hexes[matePos[2]][matePos[3]].isFree()){
+			if (!validHex(pos[2], pos[3]) && !validHex(matePos[2], matePos[3])){
+				mem[4] += Constants.MATE_COST * getComplexity();
 				mem[4] -= mem[3];
+				mate.mem[4] += Constants.MATE_COST * mate.getComplexity();
 				mate.mem[4] -= mate.mem[3];
 				return false;
-			} else if (critterworld.hexes[pos[2]][pos[3]].isFree()){
+			} else if (!validHex(matePos[2], matePos[3])){
 				babyCol = pos[2];
 				babyRow = pos[3];
 				babyDir = direction;
-			} else if (critterworld.hexes[matePos[2]][matePos[3]].isFree()){
+			} else if (!validHex(pos[2], pos[3])){
 				babyCol = matePos[2];
 				babyRow = matePos[3];
 				babyDir = mate.direction;
@@ -516,6 +532,9 @@ public class Critter {
 		int originalDir = direction;
 		direction = (direction + dir) % 6;
 		int pos[] = getAdjacentPositions(column, row);
+		if (!validHex(pos[0], pos[1])){
+			return 0;
+		}
 		int ans = critterworld.hexes[pos[0]][pos[1]].determineContents(false);
 		direction = originalDir;
 		return ans;
@@ -534,6 +553,9 @@ public class Critter {
 			int[] pos = getAdjacentPositions(tempCol, tempRow);
 			tempCol = pos[0];
 			tempRow = pos[1];
+			if (!validHex(tempCol, tempRow)){
+				return 0;
+			}
 		}
 		int ans = critterworld.hexes[tempCol][tempRow].determineContents(false);
 		return ans;

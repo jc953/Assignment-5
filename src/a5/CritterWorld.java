@@ -2,7 +2,6 @@ package a5;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class CritterWorld {
 	Hex[][] hexes;
@@ -10,7 +9,7 @@ public class CritterWorld {
 	int steps;
 	
 	public CritterWorld(String file) throws FileNotFoundException{
-		hexes = new Hex[Constants.MAX_COLUMN][Constants.MAX_ROW-Constants.MAX_COLUMN/2];
+		hexes = new Hex[Constants.MAX_COLUMN][Constants.MAX_ARRAY_ROW];
 		for (int i = 0; i < hexes.length; i++){
 			for (int j = 0; j < hexes[0].length; j++){
 				hexes[i][j] = new Hex();
@@ -51,7 +50,11 @@ public class CritterWorld {
 		for (int i = 0; i < numberRocks; i++){
 			int col = (int)(Math.random() * hexes.length);
 			int row = (int)(Math.random() * hexes[0].length);
-			hexes[col][row].rock = true;;
+			while (hexes[col][row].rock){
+				col = (int)(Math.random() * hexes.length);
+				row = (int)(Math.random() * hexes[0].length);
+			}
+			hexes[col][row].rock = true;
 		}
 	}
 	
@@ -76,22 +79,30 @@ public class CritterWorld {
 		int row = Integer.parseInt(str[2]);
 		int column = Integer.parseInt(str[3]);
 		int arrayRow = row - ((column+1)/2);
-		Critter c = new Critter(str[1], Integer.parseInt(str[4]), column, arrayRow, this);
-		hexes[column][arrayRow].critter = c;
-		critters.add(c);
+		if (hexes[column][arrayRow].isFree()){
+			Critter c = new Critter(str[1], Integer.parseInt(str[4]), column, arrayRow, this);
+			hexes[column][arrayRow].critter = c;
+			critters.add(c);
+		}
 	}
 	
 	public void addRandomCritter(String filename){
 		int col = (int)(Math.random() * hexes.length);
 		int row = (int)(Math.random() * hexes[0].length);
+		while (!hexes[col][row].isFree()){
+			col = (int)(Math.random() * hexes.length);
+			row = (int)(Math.random() * hexes[0].length);
+		}
 		Critter c = new Critter(filename, 0, col, row, this);
 		hexes[col][row].critter = c;
 		critters.add(c);
 	}
-	
+
 	public void addCritter(Critter c, int column, int row){
-		hexes[column][row].critter = c;
-		critters.add(c);
+		if (hexes[column][row].isFree()){
+			hexes[column][row].critter = c;
+			critters.add(c);
+		}
 	}
 	
 	public void step() throws InterruptedException{
