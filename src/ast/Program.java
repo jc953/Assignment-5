@@ -11,7 +11,7 @@ public class Program extends AbstractNode {
 
 	public List<Rule> rules;
 
-	Program() {
+	public Program() {
 		rules = new ArrayList<Rule>();
 	}
 

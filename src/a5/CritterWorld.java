@@ -84,11 +84,16 @@ public class CritterWorld {
 		int col = (int)(Math.random() * hexes.length);
 		int row = (int)(Math.random() * hexes[0].length);
 		Critter c = new Critter(filename, 0, col, row, this);
-		hexes[col][row].critter = c;;
+		hexes[col][row].critter = c;
 		critters.add(c);
 	}
 	
-	public void step(){
+	public void addCritter(Critter c, int column, int row){
+		hexes[column][row].critter = c;
+		critters.add(c);
+	}
+	
+	public void step() throws InterruptedException{
 		for (Critter c : critters){
 			c.step();
 		}

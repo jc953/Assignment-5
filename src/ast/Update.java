@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Update extends AbstractNode implements Command {
 
-	Expression idx;
-	Expression val;
+	public Expression idx;
+	public Expression val;
 
 	public Update(Expression idx, Expression val) {
 		this.idx = idx;

@@ -7,8 +7,8 @@ import util.F;
 abstract class Unary<Operator> extends AbstractNode implements
 		Operable<Operator> {
 
-	Operator op;
-	Expression expr;
+	public Operator op;
+	public Expression expr;
 
 	Unary(Operator op, Expression expr) {
 		this.op = op;

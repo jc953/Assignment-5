@@ -31,7 +31,7 @@ public class Critter {
 			for (int i = 0; i < memNums.length - 1; i++){
 				mem[i] = memNums[i];
 			}
-			mem[5] = 0;
+			mem[5] = 1;
 			mem[6] = 0;
 			mem[7] = memNums[5];
 			for (int i = 8; i < mem[0]; i++){
@@ -57,6 +57,7 @@ public class Critter {
 		this.mem = mem;
 		mem[3] = 1;
 		mem[4] = Constants.INITIAL_ENERGY;
+		mem[5] = 1;
 		for (int i = 6; i < mem[0]; i++){
 			mem[i] = 0;
 		}
@@ -69,9 +70,69 @@ public class Critter {
 		matePossible = false;
 	}
 
-	public void step() {
+	public void step() throws InterruptedException {
 		mem[5] = 1;
-
+		boolean actionDone = false;
+		while (!actionDone && mem[5] < 1000){
+			for (Rule r : program.rules){
+				if (r.condition.eval(this)){
+					for (Update u : r.updates){
+						mem[u.idx.eval(this)] = u.val.eval(this);
+					}
+					if (r.must != null){
+						if (r.must instanceof NullaryAction){
+							NullaryAction act = (NullaryAction) r.must;
+							switch(act.op){
+							case WAIT:
+								wait();
+								break;
+							case FORWARD:
+								move(1);
+								break;
+							case BACKWARD:
+								move(-1);
+								break;
+							case LEFT:
+								turn(-1);
+								break;
+							case RIGHT:
+								turn(1);
+								break;
+							case EAT:
+								eat();
+								break;
+							case ATTACK:
+								attack();
+								break;
+							case GROW:
+								grow();
+								break;
+							case BUD:
+								bud();
+								break;
+							case MATE:
+								mate();
+								break;
+							}
+						} else {
+							UnaryAction act = (UnaryAction) r.must;
+							switch(act.op){
+							case TAG:
+								tag(act.expr.eval(this));
+								break;
+							case SERVE:
+								serve(act.expr.eval(this));
+								break;
+							}
+						}
+						actionDone = true;
+						lastRule = r;
+					}
+					break;
+				}
+			}
+			mem[5]++;
+		}
 	}
 
 	/**
@@ -209,7 +270,7 @@ public class Critter {
 
 	public void turn(int n) {
 		assert (n == 1 || n == -1);
-		direction = direction + n;
+		direction = (direction + n) % 6;
 		mem[4] -= mem[3];
 		if (mem[4] <= 0){
 			critterworld.kill(this);
@@ -243,8 +304,8 @@ public class Critter {
 
 	public void attack() {
 		int[] pos = getAdjacentPositions(column, row);
-		if (critterworld.hexes[pos[0]][pos[1]].getCritter() != null) {
-			critterworld.hexes[pos[0]][pos[1]].getCritter().attacked(this);
+		if (critterworld.hexes[pos[0]][pos[1]].critter != null) {
+			critterworld.hexes[pos[0]][pos[1]].critter.attacked(this);
 			mem[4] -= mem[3] * Constants.ATTACK_COST;
 		}
 	}
@@ -264,8 +325,8 @@ public class Critter {
 		assert (tagNumber <= 99 && tagNumber >= 0);
 		mem[4] -= mem[3];
 		int[] pos = getAdjacentPositions(column, row);
-		if (critterworld.hexes[pos[0]][pos[1]].getCritter() != null) {
-			critterworld.hexes[pos[0]][pos[1]].getCritter().mem[6] = tagNumber;
+		if (critterworld.hexes[pos[0]][pos[1]].critter != null) {
+			critterworld.hexes[pos[0]][pos[1]].critter.mem[6] = tagNumber;
 		}
 	}
 
@@ -290,15 +351,16 @@ public class Critter {
 			return false;
 		} else {
 			Program tempProg = program.dup(program);
-			int[] tempMem = mem;
+			int[] tempMem = Arrays.copyOf(mem, mem.length);
 			while (Math.random() < 0.25){
 				if (Math.random() < 0.5) {
 					Mutation.mutate(tempProg);
 				} else {
-					tempMem = mutateAttributes(mem);
+					tempMem = mutateAttributes(tempMem);
 				}
 			}
-			critterworld.hexes[pos[2]][pos[3]].setCritter(new Critter(tempProg, tempMem, direction, pos[2], pos[3], critterworld));
+			Critter c = new Critter(tempProg, tempMem, direction, pos[2], pos[3], critterworld);
+			critterworld.addCritter(c, c.column, c.row);
 			if (mem[4] == 0)
 				critterworld.kill(this);
 			return true;
@@ -307,96 +369,146 @@ public class Critter {
 
 
 	public boolean mate(){
-		int [] pos = getAdjacentPositions(column, row);
-		boolean mate = false;
-		switch (direction){
-			case 0: 
-				if(critterworld.hexes[pos[0]][pos[1]].getCritter().direction == 3 
-				&& critterworld.hexes[pos[0]][pos[1]].getCritter().matePossible == true) mate = true;
-				break;
-			case 1: 
-				if(critterworld.hexes[pos[0]][pos[1]].getCritter().direction == 4 
-				&& critterworld.hexes[pos[0]][pos[1]].getCritter().matePossible == true) mate = true;
-				break;
-			case 2: 
-				if(critterworld.hexes[pos[0]][pos[1]].getCritter().direction == 5 
-				&& critterworld.hexes[pos[0]][pos[1]].getCritter().matePossible == true) mate = true;
-				break;
-			case 3: 
-				if(critterworld.hexes[pos[0]][pos[1]].getCritter().direction == 0 
-				&& critterworld.hexes[pos[0]][pos[1]].getCritter().matePossible == true) mate = true;
-				break;
-			case 4: 
-				if(critterworld.hexes[pos[0]][pos[1]].getCritter().direction == 1 
-				&& critterworld.hexes[pos[0]][pos[1]].getCritter().matePossible == true) mate = true;
-				break;
-			case 5: 
-				if(critterworld.hexes[pos[0]][pos[1]].getCritter().direction == 2 
-				&& critterworld.hexes[pos[0]][pos[1]].getCritter().matePossible == true) mate = true;
-				break;
-		}
-		
-		if (!mate){
+		int[] pos = getAdjacentPositions(column, row);
+		Critter mate = critterworld.hexes[pos[0]][pos[1]].critter;
+		int[] matePos = getAdjacentPositions(mate.column, mate.row);
+		if ((mate.direction - direction)%3 == 0){
 			matePossible = true;
-			return false;//Ask Jon
 		}
-		//do the energy mate cost thing here
-		int [] tempMem;
-		if (Math.random()<0.5){
-			tempMem = new int[mem[0]];
-		}
-		else{
-			tempMem = new int[critterworld.hexes[pos[0]][pos[1]].getCritter().mem[0]];
-		}
-		
-		while (Math.random() < 0.25){
-			if (Math.random() < 0.5) {
-				Mutation.mutate(tempProg);
-			} else {
-				tempMem = mutateAttributes(mem);
+		if (matePossible && mate.matePossible){
+			mem[4] -= Constants.MATE_COST * getComplexity();
+			mate.mem[4] -= Constants.MATE_COST * mate.getComplexity();
+			if (mem[4] < 0 || mate.mem[4] < 0){
+				if (mem[4] < 0){
+					critterworld.kill(this);
+				}
+				if (mate.mem[4] < 0){
+					critterworld.kill(mate);
+				}
+				return false;
 			}
+			int babyCol;
+			int babyRow;
+			int babyDir;
+			if (!critterworld.hexes[pos[2]][pos[3]].isFree() && !critterworld.hexes[matePos[2]][matePos[3]].isFree()){
+				mem[4] -= mem[3];
+				mate.mem[4] -= mate.mem[3];
+				return false;
+			} else if (critterworld.hexes[pos[2]][pos[3]].isFree()){
+				babyCol = pos[2];
+				babyRow = pos[3];
+				babyDir = direction;
+			} else if (critterworld.hexes[matePos[2]][matePos[3]].isFree()){
+				babyCol = matePos[2];
+				babyRow = matePos[3];
+				babyDir = mate.direction;
+			} else {
+				if (Math.random() < 0.5){
+					babyCol = pos[2];
+					babyRow = pos[3];
+					babyDir = direction;
+				} else{
+					babyCol = matePos[2];
+					babyRow = matePos[3];
+					babyDir = mate.direction;
+				}
+			}
+			int rulesize;
+			Program tempProg = new Program();
+			if (Math.random() < 0.5){
+				rulesize = program.rules.size();
+			} else {
+				rulesize = mate.program.rules.size();
+			}
+			int i = 0;
+			for (; i < program.rules.size() && i < mate.program.rules.size(); i++){
+				if (Math.random() < 0.5){
+					tempProg.rules.add(program.rules.get(i));
+				} else {
+					tempProg.rules.add(mate.program.rules.get(i));
+				}
+			}
+			if (program.rules.size() > i && program.rules.size() == rulesize){
+				for (; i < program.rules.size(); i++){
+					tempProg.rules.add(program.rules.get(i));
+				}
+			} 
+			if (mate.program.rules.size() > i && mate.program.rules.size() == rulesize){
+				for (; i < mate.program.rules.size(); i++){
+					tempProg.rules.add(mate.program.rules.get(i));
+				}
+			}
+			int[] tempMem;
+			if (Math.random() < 0.5){
+				tempMem = new int[mem[0]];
+			} else {
+				tempMem = new int[mate.mem[0]];
+			}
+			for (int j = 1; j <= 2; j++){
+				if (Math.random() < 0.5){
+					tempMem[i] = mem[i];
+				} else {
+					tempMem[i] = mate.mem[i];
+				}
+			}
+			while (Math.random() < 0.25){
+				if (Math.random() < 0.5) {
+					Mutation.mutate(tempProg);
+				} else {
+					tempMem = mutateAttributes(tempMem);
+				}
+			}
+			Critter c = new Critter(tempProg, tempMem, babyDir, babyCol, babyRow, critterworld);
+			critterworld.addCritter(c, c.column, c.row);
+			if (mem[4] == 0){
+				critterworld.kill(this);
+			}
+			if (mate.mem[4] == 0){
+				critterworld.kill(mate);
+			}
+			return true;
+		} else {
+			return false;
 		}
-		
 	}
 	
 	public int[] mutateAttributes(int[] mem){
-		int[] result = Arrays.copyOf(mem, mem.length);
 		double i = Math.random();
 		if (i < 1.0/3){
-			if (result[0] == 8){
-				result[0]++;
-				result = Arrays.copyOf(result, result[0]);
-				return result;
+			if (mem[0] == 8){
+				mem[0]++;
+				mem = Arrays.copyOf(mem, mem[0]);
+				return mem;
 			}
 			if (Math.random() < 0.5){
-				result[0]++;
+				mem[0]++;
 			} else {
-				result[0]--;
+				mem[0]--;
 			}
-			result = Arrays.copyOf(result, result[0]);
-			return result;
+			mem = Arrays.copyOf(mem, mem[0]);
+			return mem;
 		} else if (i < 2.0 / 3){
-			if (result[1] == 1){
-				result[1]++;
-				return result;
+			if (mem[1] == 1){
+				mem[1]++;
+				return mem;
 			}
 			if (Math.random() < 0.5){
-				result[1]++;
+				mem[1]++;
 			} else {
-				result[1]--;
+				mem[1]--;
 			}
-			return result;
+			return mem;
 		} else {
-			if (result[2] == 1){
-				result[2]++;
-				return result;
+			if (mem[2] == 1){
+				mem[2]++;
+				return mem;
 			}
 			if (Math.random() < 0.5){
-				result[2]++;
+				mem[2]++;
 			} else {
-				result[2]--;
+				mem[2]--;
 			}
-			return result;
+			return mem;
 		}
 	}
 

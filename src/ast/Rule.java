@@ -12,9 +12,9 @@ import util.Utils;
  */
 public class Rule extends AbstractNode {
 
-	Condition condition;
-	List<Update> updates;
-	Command must;
+	public Condition condition;
+	public List<Update> updates;
+	public Command must;
 
 	public Rule(Condition condition, List<Update> updates, Command must) {
 		this.condition = condition;

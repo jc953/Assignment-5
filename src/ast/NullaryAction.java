@@ -16,7 +16,7 @@ public class NullaryAction extends AbstractNode implements Action,
 		}
 	}
 
-	Op op;
+	public Op op;
 
 	public NullaryAction(Op op) {
 		this.op = op;
