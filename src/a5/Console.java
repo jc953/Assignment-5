@@ -102,8 +102,13 @@ public class Console {
      * @param n
      */
     private void advanceTime(int n) {
-    	for (int i = 0; i < n; i++){
-    		cw.step();
+    	try{
+    		for (int i = 0; i < n; i++){
+    			cw.step();
+    		}
+    	}
+    	catch (InterruptedException ie){
+    		System.out.println("Error");
     	}
     }
     
