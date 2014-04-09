@@ -84,7 +84,7 @@ public class Critter {
 							NullaryAction act = (NullaryAction) r.must;
 							switch(act.op){
 							case WAIT:
-								wait();
+								waitTurn();
 								break;
 							case FORWARD:
 								move(1);

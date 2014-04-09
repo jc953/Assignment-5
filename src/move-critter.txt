@@ -1,0 +1,19 @@
+memsize: 10
+defense: 5
+offense: 7
+size: 1
+energy: 500
+posture: 17
+{nearby[2] = 0 or nearby[1] < 0-1} and ENERGY > 2500 --> backward;
+{ENERGY > SIZE  * 400 and SIZE < 3} --> backward;
+ahead[0] < 0-1 and ENERGY < 500 * SIZE --> forward;
+ahead[2] < 0-10 and ahead[1] = 0 --> forward;
+ahead[3] < 0-15 and ahead[1] = 0 --> backward;
+ahead[4] < 0-20 and ahead[1] = 0 --> forward;
+nearby[0] > 0 and {nearby[3] = 0 or nearby[3] < 0-1} --> backward;
+1 = 1 --> forward;
+1 = 1 --> forward;
+1 = 1 --> forward;
+1 = 1 --> forward;
+1 = 1 --> forward;
+1 = 1 --> forward;

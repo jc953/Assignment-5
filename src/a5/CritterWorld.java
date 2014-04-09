@@ -77,7 +77,7 @@ public class CritterWorld {
 		int column = Integer.parseInt(str[3]);
 		int arrayRow = row - ((column+1)/2);
 		Critter c = new Critter(str[1], Integer.parseInt(str[4]), column, arrayRow, this);
-		hexes[column][arrayRow].critter = c;;
+		hexes[column][arrayRow].critter = c;
 		critters.add(c);
 	}
 	
@@ -105,8 +105,8 @@ public class CritterWorld {
 	}
 	
 	public void info(){
-		System.out.println(steps + " steps have elapsed.");
-		System.out.println(critters.size() + " critters are alive.");
+		System.out.println(steps==1 ? steps + " step has elapsed.": steps + " steps have elapsed.");
+		System.out.println(critters.size()==1 ?critters.size() + " critter is alive." : critters.size() + " critters are alive");
 		if (hexes.length == 1){
 			for (int i = hexes[0].length-1; i >= 0; i--){
 				System.out.println(hexes[0][i].getWorldInfo()+"\n");
