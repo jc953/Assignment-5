@@ -5,22 +5,6 @@ public class Hex {
 	boolean rock = false;
 	Critter critter = null;
 	
-	public Critter getCritter(){
-		return critter;
-	}
-	
-	public void setRock(){
-		rock = true;
-	}
-	
-	public void setCritter(Critter c){
-		critter = c;
-	}
-	
-	public void setFood(int i){
-		food = i;
-	}
-	
 	public boolean isFree(){
 		return (!rock && critter==null);
 	}
