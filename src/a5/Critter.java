@@ -6,6 +6,11 @@ import java.util.Arrays;
 import parse.*;
 import ast.*;
 
+
+/**
+ * The Critter class represents an individual critter. It has information
+ * on the critter state, rules and attributes and coordinates critter functions and actions.
+ */
 public class Critter {
 	CritterWorld critterworld;
 	Program program;
@@ -16,6 +21,14 @@ public class Critter {
 	int row;
 	boolean matePossible;
 
+	/**
+	 * Constructor for Critter loaded from file
+	 * @param file the file which contains the Critter's rules and attributes
+	 * @param direction direction new Critter should face
+	 * @param column column of new Critter
+	 * @param row row of new Critter
+	 * @param critterworld the world that this Critter exists in
+	 */
 	public Critter(String file, int direction, int column, int row, CritterWorld critterworld) {
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
@@ -52,7 +65,16 @@ public class Critter {
 			System.out.println("Error in producing a Critter.");
 		}
 	}
-
+	
+	/**
+	 * Constructor for Critter born out of budding or mating of parents
+	 * @param program the new Critter's rule set
+	 * @param mem the new Critter's memory
+	 * @param direction the new Critter's direction
+	 * @param column the new Critter's column
+	 * @param row the new Critter's row
+	 * @param critterworld the world that the new Critter belongs to
+	 */
 	public Critter(Program program, int[] mem, int direction, int column, int row, CritterWorld critterworld) {
 		this.mem = mem;
 		mem[3] = 1;
