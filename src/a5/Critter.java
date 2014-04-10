@@ -136,7 +136,8 @@ public class Critter {
 								mate();
 								break;
 							}
-						} else {
+							actionDone = true;
+						} else if (r.must instanceof UnaryAction){
 							UnaryAction act = (UnaryAction) r.must;
 							switch(act.op){
 							case TAG:
@@ -146,8 +147,11 @@ public class Critter {
 								serve(act.expr.eval(this));
 								break;
 							}
+							actionDone = true;
+						} else if (r.must instanceof Update){
+							Update u = (Update) r.must;
+							mem[u.idx.eval(this)] = u.val.eval(this);
 						}
-						actionDone = true;
 					}
 					lastRule = r;
 					break;

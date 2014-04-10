@@ -6,5 +6,5 @@ energy: 500
 posture: 17
 1 = 1 --> mem[8] := 5;
 nearby[0] = ahead[1] --> grow;
-ahead[-1] = 0 --> grow;
-ahead[1] = 1002 --> mem[9] = random[8]; 
+ahead[0-1] = 0 --> grow;
+ahead[1] = 1002 --> mem[9] := random[8]; 

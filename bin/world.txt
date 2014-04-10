@@ -13,4 +13,4 @@ critter src/mate-critter1.txt 5 6 0
 critter src/mate-critter2.txt 6 6 3
 critter src/tag-critter.txt 7 8 0
 critter src/eat-serve-tagged-critter.txt 8 8 3
-critter src/eat-serve-tagged-critter.txt 3 4 0
+critter src/update-critter.txt 3 4 0

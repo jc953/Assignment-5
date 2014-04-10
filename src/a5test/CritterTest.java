@@ -235,6 +235,7 @@ public class CritterTest {
 		int column = 4;
 		int row = 3;
 		int arrayRow = row - ((column+1)/2);
+		System.out.println(cw.hexes[column][arrayRow].getWorldInfo());
 		cw.step();
 		System.out.println(cw.hexes[column][arrayRow].critter.mem[8]);// == 8;
 		//assert cw.hexes[column][arrayRow+1].critter.mem[3] == 2;
