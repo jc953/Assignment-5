@@ -56,7 +56,7 @@ public class Program extends AbstractNode {
 		if (!rules.isEmpty()) {
 			for (Rule rule : rules) {
 				rule.prettyPrint(sb);
-				sb.append("\n\n");
+				sb.append("\n");
 			}
 			int len = sb.length();
 			sb.delete(len - 2, len);

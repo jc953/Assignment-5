@@ -107,6 +107,14 @@ public class Tokenizer implements Iterator<Token> {
 			if (c == '\n')
 				lineNo++;
 			c = nextChar();
+
+		}
+		
+		while (c=='/' && nextChar()=='/'){
+			while (c != '\n')
+				c = nextChar();
+			c = nextChar();
+			lineNo++;
 		}
 
 		resetBuffer(c);
@@ -150,13 +158,6 @@ public class Tokenizer implements Iterator<Token> {
 			lexIdentifier();
 		else if (Character.isDigit(c))
 			lexNum();
-		else if (c == '/'){
-			if (consume('/')){ 
-				lineNo++;
-				c = nextChar();
-				resetBuffer(c);
-			}
-		}
 		else
 			unexpected();
 	}

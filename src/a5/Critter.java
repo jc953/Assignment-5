@@ -724,6 +724,7 @@ public class Critter {
 		StringBuffer sb = new StringBuffer();
 		program.prettyPrint(sb);
 		System.out.println(sb);
+		sb = new StringBuffer("The last rule performed was \n");
 		if (lastRule != null) {
 			lastRule.prettyPrint(sb);
 			System.out.println(sb);
