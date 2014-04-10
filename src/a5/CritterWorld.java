@@ -167,11 +167,7 @@ public class CritterWorld {
 		ArrayList<Critter> tempCrits = new ArrayList<Critter>(critters);
 		for (Critter c : tempCrits){
 			if (c!=null){
-				try {
-					c.step();
-				} catch (InterruptedException e) {
-					System.out.println("Sorry, there seems to have been an error =(");
-				}
+				c.step();
 			}
 		}
 		steps++;

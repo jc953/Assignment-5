@@ -4,9 +4,14 @@ import org.junit.Test;
 
 import a5.*;
 
+/**
+ * First set of test cases for the Critter class.
+ */
 public class CritterTest {
 	
-	//wait
+	/**
+	 * Tests the wait method.
+	 */
 	@Test
 	public void testA(){
 		Constants.read("src/constants.txt");
@@ -27,7 +32,10 @@ public class CritterTest {
 		assert cw.hexes[column][arrayRow].critter.equals(c);
 	}
 	
-	//move + turn + moving to rock
+	/**
+	 * Tests the move and turn method. Also makes sure that moving into a rock
+	 * will not move the critter, but still take energy.
+	 */
 	@Test
 	public void testB(){
 		Constants.read("src/constants.txt");
@@ -52,7 +60,10 @@ public class CritterTest {
 		assert cw.hexes[column+1][arrayRow+1].critter.mem[4] == 493;
 	}
 	
-	//grow
+	/**
+	 * Tests the grow method and that the critter will die if it tries to grow
+	 * without enough energy.
+	 */
 	@Test
 	public void testC(){
 		Constants.read("src/constants.txt");
@@ -70,7 +81,9 @@ public class CritterTest {
 		assert cw.hexes[column][arrayRow].food == 400;
 	}
 	
-	//attack
+	/**
+	 * Tests the attack method. Makes sure both critters lose energy.
+	 */
 	@Test
 	public void testD(){
 		Constants.read("src/constants.txt");
@@ -83,7 +96,10 @@ public class CritterTest {
 		assert cw.hexes[column][arrayRow+1].critter.mem[4] == 1373;
 	}
 	
-	//bud successful, bud where parent dies but kid still comes out.
+	/**
+	 * Tests the bud method. Makes sure that if a critter has just enough 
+	 * energy for a new critter, it will make it and die afterwards.
+	 */
 	@Test
 	public void testE(){
 		Constants.read("src/constants.txt");
@@ -109,23 +125,29 @@ public class CritterTest {
 		assert cw.hexes[column-1][arrayRow].critter.mem[4] == Constants.INITIAL_ENERGY;
 	}
 	
-	//bud unsuccessful due to rock - no baby but parent still loses energy
-		@Test
-		public void testF(){
-			Constants.read("src/constants.txt");
-			CritterWorld cw = new CritterWorld("src/world.txt");
-			int column = 1;
-			int row = 7;
-			int arrayRow = row - ((column+1)/2);
-			cw.hexes[column][arrayRow-1].rock = true;
-			assert cw.hexes[column][arrayRow].critter.mem[4] == 2363;
-			assert cw.hexes[column][arrayRow-1].critter == null;
-			cw.step(); 
-			assert cw.hexes[column][arrayRow-1].critter == null;
-			assert cw.hexes[column][arrayRow].critter.mem[4] == 1184;
-		}
+	/**
+	 * Tests when the bud is unsuccessful due to a rock. Makes sure the critter
+	 * still loses energy.
+	 */
+	@Test
+	public void testF(){
+		Constants.read("src/constants.txt");
+		CritterWorld cw = new CritterWorld("src/world.txt");
+		int column = 1;
+		int row = 7;
+		int arrayRow = row - ((column+1)/2);
+		cw.hexes[column][arrayRow-1].rock = true;
+		assert cw.hexes[column][arrayRow].critter.mem[4] == 2363;
+		assert cw.hexes[column][arrayRow-1].critter == null;
+		cw.step(); 
+		assert cw.hexes[column][arrayRow-1].critter == null;
+		assert cw.hexes[column][arrayRow].critter.mem[4] == 1184;
+	}
 	
-	//mate
+	/**
+	 * Tests the mate method. Makes sure the baby as mem values from either
+	 * parent.
+	 */
 	@Test
 	public void testG(){
 		Constants.read("src/constants.txt");
@@ -156,7 +178,10 @@ public class CritterTest {
 		}
 	}
 	
-	//mate with one rock
+	/**
+	 * Tests the mate method when there is a rock behind one mate. Makes sure the
+	 * baby is guaranteed to be behind the other parent.
+	 */
 	@Test
 	public void testH(){
 		Constants.read("src/constants.txt");
@@ -186,7 +211,10 @@ public class CritterTest {
 		}
 	}
 	
-	//mate with 2 rocks
+	/**
+	 * Tests when rocks are behind both parents. There is no baby born and the 
+	 * parents only lose a little amount of energy.
+	 */
 	@Test
 	public void testI(){
 		Constants.read("src/constants.txt");
@@ -204,7 +232,9 @@ public class CritterTest {
 		assert cw.hexes[column][arrayRow+1].critter.mem[4] == 3352;
 	}
 	
-	//eat tag serve
+	/**
+	 * Tests the tag, serve, and eat method.
+	 */
 	@Test
 	public void testJ(){
 		Constants.read("src/constants.txt");
@@ -222,24 +252,6 @@ public class CritterTest {
 		cw.hexes[column][arrayRow+1].food = 1000;
 		cw.step();
 		assert cw.hexes[column][arrayRow+1].food == 844;
-		assert cw.hexes[column][arrayRow+1].critter.mem[4] == 2500;
-		
-	}
-	/*
-	 * Test for updates: nearby, ahead and random
-	 */
-	@Test
-	public void testK(){
-		Constants.read("src/constants.txt");
-		CritterWorld cw = new CritterWorld("src/world.txt");
-		int column = 4;
-		int row = 3;
-		int arrayRow = row - ((column+1)/2);
-		System.out.println(cw.hexes[column][arrayRow].getWorldInfo());
-		cw.step();
-		System.out.println(cw.hexes[column][arrayRow].critter.mem[8]);// == 8;
-		//assert cw.hexes[column][arrayRow+1].critter.mem[3] == 2;
-		
-		
+		assert cw.hexes[column][arrayRow+1].critter.mem[4] == 2500;	
 	}
 }
