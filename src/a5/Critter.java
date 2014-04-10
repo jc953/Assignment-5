@@ -550,7 +550,7 @@ public class Critter {
 
 	public int ahead(int dist) {
 		if (dist == 0)
-			return this.mem[7];
+			return critterworld.hexes[column][row].determineContents(false);
 		if (dist == -1)
 			return critterworld.hexes[column][row].determineContents(true);
 		if (dist < -1)

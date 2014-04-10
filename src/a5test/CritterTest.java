@@ -225,6 +225,20 @@ public class CritterTest {
 		assert cw.hexes[column][arrayRow+1].critter.mem[4] == 2500;
 		
 	}
-	
-	
+	/*
+	 * Test for updates: nearby, ahead and random
+	 */
+	@Test
+	public void testK(){
+		Constants.read("src/constants.txt");
+		CritterWorld cw = new CritterWorld("src/world.txt");
+		int column = 4;
+		int row = 3;
+		int arrayRow = row - ((column+1)/2);
+		cw.step();
+		System.out.println(cw.hexes[column][arrayRow].critter.mem[8]);// == 8;
+		//assert cw.hexes[column][arrayRow+1].critter.mem[3] == 2;
+		
+		
+	}
 }
