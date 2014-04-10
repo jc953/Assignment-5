@@ -5,5 +5,5 @@ size: 1
 energy: 495
 posture: 17
 1 = 1 --> wait;
-//hi
-1 = 1 --> wait; //thisbetterwork
+//test1
+1 = 1 --> wait; //test2
