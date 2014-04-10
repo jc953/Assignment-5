@@ -103,14 +103,15 @@ public class Tokenizer implements Iterator<Token> {
 			c = nextChar();
 
 		// consume whitespaces
-		while (c == ' ' || c == '\t' || c == '\n' || c == '\r' || buf.indexOf("//") != -1) {
-			if (c == '\n' || buf.indexOf("//") != -1)
+		while (c == ' ' || c == '\t' || c == '\n' || c == '\r') {
+			if (c == '\n')
 				lineNo++;
 			c = nextChar();
 		}
 
 		resetBuffer(c);
 
+		
 		if (c == '[')
 			setNextToken(Token.LBRACKET);
 		else if (c == ']')
@@ -149,6 +150,13 @@ public class Tokenizer implements Iterator<Token> {
 			lexIdentifier();
 		else if (Character.isDigit(c))
 			lexNum();
+		else if (c == '/'){
+			if (consume('/')){ 
+				lineNo++;
+				c = nextChar();
+				resetBuffer(c);
+			}
+		}
 		else
 			unexpected();
 	}
