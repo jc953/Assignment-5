@@ -25,6 +25,8 @@ public class test {
 		test4();
 		test5();
 		test6();
+		test7();
+		test8();
 	}
 	
 	public static void test2() throws FileNotFoundException, InterruptedException{
@@ -96,6 +98,9 @@ public class test {
 		assert cw.hexes[column][arrayRow-1].critter != null;
 		assert cw.hexes[column][arrayRow].critter.mem[4] == 1180;
 		assert cw.hexes[column][arrayRow-1].critter.mem[4] == Constants.INITIAL_ENERGY;
+		assert cw.hexes[column][arrayRow-1].critter.mem[3] == 1;
+		assert cw.hexes[column][arrayRow-1].critter.mem[6] == 0;
+		assert cw.hexes[column][arrayRow-1].critter.mem[7] == 0;
 		cw.step(); 
 		assert cw.hexes[column][arrayRow].critter.mem[4] == 1179;
 		assert cw.hexes[column][arrayRow].critter.direction == 1;
@@ -105,6 +110,60 @@ public class test {
 		assert cw.hexes[column-1][arrayRow].critter.mem[4] == Constants.INITIAL_ENERGY;
 		System.out.println("Bud works");
 	}
+	
+	public static void test7() throws FileNotFoundException, InterruptedException{
+		CritterWorld cw = new CritterWorld("src/world.txt");
+		int column = 6;
+		int row = 5;
+		int arrayRow = row - ((column+1)/2);
+		assert cw.hexes[column][arrayRow-1].critter == null;
+		assert cw.hexes[column][arrayRow+2].critter == null;
+		cw.step(); 
+		assert cw.hexes[column][arrayRow-1].critter != null || cw.hexes[column][arrayRow+2].critter != null;
+		assert cw.hexes[column][arrayRow].critter.mem[4] == 2724;
+		assert cw.hexes[column][arrayRow+1].critter.mem[4] == 2474;
+		Critter baby = cw.hexes[column][arrayRow-1].critter;
+		if (baby == null) baby = cw.hexes[column][arrayRow+2].critter;
+		assert baby.mem[3] == 1;
+		assert baby.mem[4] == Constants.INITIAL_ENERGY;
+		assert baby.mem[6] == 0;
+		assert baby.mem[7] == 0;
+		for(int  t=0;t<3;t++){
+			boolean a = Math.abs(baby.mem[t] - cw.hexes[column][arrayRow].critter.mem[t]) <= 1;
+			boolean b = Math.abs(baby.mem[t] - cw.hexes[column][arrayRow+1].critter.mem[t]) <= 1;
+			assert a || b; //Note: with very low probability this assertion will fail, in cases where
+						   //there are 3 or more mutations that each exclusively add to or subtract
+						   //from an attribute
+		}
+		int r = baby.row;
+		int c = baby.column;
+		cw.kill(baby);
+		assert cw.hexes[c][r].critter == null;
+		cw.hexes[c][r].rock = true;
+		cw.step();
+		assert cw.hexes[c][r].rock;
+		assert cw.hexes[column][arrayRow-1].critter != null || cw.hexes[column][arrayRow+2].critter != null;
+		System.out.println("Mate works");
+	}
+	
+	public static void test8() throws FileNotFoundException, InterruptedException{
+		CritterWorld cw = new CritterWorld("src/world.txt");
+		int column = 8;
+		int row = 7;
+		int arrayRow = row - ((column+1)/2);
+		cw.step();
+		assert cw.hexes[column][arrayRow+1].critter.mem[6] == 47;
+		assert cw.hexes[column][arrayRow+1].food == 34;
+		assert cw.hexes[column][arrayRow+1].critter.mem[4] == 2324;
+		System.out.println(cw.hexes[column][arrayRow+1].critter.mem[4]);
+		cw.step();
+		System.out.println(cw.hexes[column][arrayRow+1].critter.mem[4]);// == 2358;
+		System.out.println(cw.hexes[column][arrayRow+1].food);// == 0;
+		System.out.println("Tag, Eat and Serve work");
+	}
+	
+	
 }
 	
 	
+

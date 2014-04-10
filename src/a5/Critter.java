@@ -303,8 +303,8 @@ public class Critter {
 
 	public void serve(int amountServed) {
 		if (amountServed < mem[4]) {
-			mem[4] -= amountServed;
-			critterworld.hexes[column][row].food += amountServed + mem[3];
+			mem[4] -= (amountServed + mem[3]);
+			critterworld.hexes[column][row].food += amountServed;
 		} else {
 			critterworld.hexes[column][row].food += mem[4];
 			critterworld.kill(this);
@@ -390,6 +390,7 @@ public class Critter {
 	public boolean mate(){
 		int[] pos = getAdjacentPositions(column, row);
 		Critter mate = critterworld.hexes[pos[0]][pos[1]].critter;
+		if (mate == null) return false;
 		int[] matePos = getAdjacentPositions(mate.column, mate.row);
 		if ((mate.direction - direction)%3 == 0){
 			matePossible = true;
@@ -465,11 +466,12 @@ public class Critter {
 			} else {
 				tempMem = new int[mate.mem[0]];
 			}
+			tempMem[0] = tempMem.length;
 			for (int j = 1; j <= 2; j++){
 				if (Math.random() < 0.5){
-					tempMem[i] = mem[i];
+					tempMem[j] = mem[j];
 				} else {
-					tempMem[i] = mate.mem[i];
+					tempMem[j] = mate.mem[j];
 				}
 			}
 			while (Math.random() < 0.25){
