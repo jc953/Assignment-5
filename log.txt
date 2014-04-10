@@ -1,0 +1,275 @@
+commit 731286754106470deccecec248d5d7b21efa1dde
+Author: jc953 <jc953@cornell.edu>
+Date:   Wed Apr 9 23:54:19 2014 -0400
+
+    junit critter
+
+commit f9b7666927368178a06cb0761b36bd9a1fdc857f
+Author: iaj8 <iaj8@cornell.edu>
+Date:   Wed Apr 9 23:53:10 2014 -0400
+
+    writtenproblem
+
+commit f777b08168133564270611cdc4177ec06fb440e8
+Author: iaj8 <iaj8@cornell.edu>
+Date:   Wed Apr 9 22:33:10 2014 -0400
+
+    files
+
+commit 2e54a879c116839a7dd15dea0a83e71668be889a
+Author: jc953 <jc953@cornell.edu>
+Date:   Wed Apr 9 22:15:11 2014 -0400
+
+    test cases and javadoc
+
+commit f58df19e0c881dd22d79a4221712a454f1b030a6
+Author: jc953 <jc953@cornell.edu>
+Date:   Wed Apr 9 20:28:17 2014 -0400
+
+    adding junit test
+
+commit 26172b999ca0185c1475a8e79e9058fff6bd9692
+Author: jc953 <jc953@cornell.edu>
+Date:   Wed Apr 9 20:26:35 2014 -0400
+
+    fixed condition eval
+
+commit cdd24e195c9c8528240b619ffdec2a21e0fe44b1
+Merge: fc81333 979bd4f
+Author: iaj8 <iaj8@cornell.edu>
+Date:   Wed Apr 9 19:05:19 2014 -0400
+
+    Merge branch 'master' of https://github.com/jc953/Assignment-5
+
+commit fc8133390ccf3c965d8fba4fbfc6daef9058d6e7
+Author: iaj8 <iaj8@cornell.edu>
+Date:   Wed Apr 9 19:04:55 2014 -0400
+
+    tests
+
+commit 979bd4fa3e8074fea57a69166f3376a171a99e93
+Author: jc953 <jc953@cornell.edu>
+Date:   Wed Apr 9 17:17:18 2014 -0400
+
+    max array row
+
+commit 70c4f10774600b28e7b90eefbe7e9687bd2eb0f7
+Author: jc953 <jc953@cornell.edu>
+Date:   Wed Apr 9 15:41:43 2014 -0400
+
+    takes care of rocks and out of boundaries
+
+commit b6d3e33367c604595fe49f1a55e2d34e13af096a
+Author: iaj8 <iaj8@cornell.edu>
+Date:   Wed Apr 9 10:50:26 2014 -0400
+
+    tests
+
+commit 84904256acde52d539d7409560be42bace6a0682
+Author: iaj8 <iaj8@cornell.edu>
+Date:   Wed Apr 9 10:22:15 2014 -0400
+
+    tests
+
+commit 9384c47348292d0ef6ff9de42383d46727543476
+Author: jc953 <jc953@cornell.edu>
+Date:   Tue Apr 8 23:15:36 2014 -0400
+
+    fixing console
+
+commit ef1e27fe6fd3dde43aea2325e677a65996c72e09
+Merge: 87d30a3 0e02d1d
+Author: jc953 <jc953@cornell.edu>
+Date:   Tue Apr 8 23:03:47 2014 -0400
+
+    Merge branch 'master' of https://github.com/jc953/Assignment-5
+
+commit 87d30a38879efaf78f31141163ba755562550dde
+Author: jc953 <jc953@cornell.edu>
+Date:   Tue Apr 8 23:03:41 2014 -0400
+
+    edited world.txt
+
+commit 0e02d1d58ce03d752726498bcfb7aabeacfcf6d1
+Author: iaj8 <iaj8@cornell.edu>
+Date:   Tue Apr 8 23:03:11 2014 -0400
+
+    console
+
+commit a9913993273480c28df0c14574edbd89f9c8580b
+Author: jc953 <jc953@cornell.edu>
+Date:   Tue Apr 8 23:00:03 2014 -0400
+
+    step for critter
+
+commit 03c82d325fa48f8c96ae2f343e5048faef2a1970
+Merge: f3a0c8e 6595801
+Author: iaj8 <iaj8@cornell.edu>
+Date:   Tue Apr 8 21:53:10 2014 -0400
+
+    Merge branch 'master' of https://github.com/jc953/Assignment-5
+
+commit f3a0c8ef28bcd1671fd3d39786e1e367a7153e67
+Author: iaj8 <iaj8@cornell.edu>
+Date:   Tue Apr 8 21:52:08 2014 -0400
+
+    mate
+
+commit 659580115caa820d2ba2bd54c13ffcb2d39b97aa
+Author: jc953 <jc953@cornell.edu>
+Date:   Tue Apr 8 21:48:46 2014 -0400
+
+    got rid of getters and sestters
+
+commit 15909bd5e8c80fef869fb2fbe3c8acd62bed0771
+Author: jc953 <jc953@cornell.edu>
+Date:   Tue Apr 8 21:24:32 2014 -0400
+
+    fixed energy costs added some mutate methods
+
+commit a5faf86ef4074a4ba6e25e43231541994ff1e521
+Author: iaj8 <iaj8@cornell.edu>
+Date:   Tue Apr 8 18:52:29 2014 -0400
+
+    bud
+
+commit 9ec98887f71959551aff6fc11f39c87e1987375b
+Merge: 6314633 c7bb024
+Author: iaj8 <iaj8@cornell.edu>
+Date:   Tue Apr 8 18:11:08 2014 -0400
+
+    Merge branch 'master' of https://github.com/jc953/Assignment-5
+
+commit 63146335bd014af0b0e22d58100cfe3ab1ae38e5
+Author: iaj8 <iaj8@cornell.edu>
+Date:   Tue Apr 8 18:10:25 2014 -0400
+
+    ishaan
+
+commit c7bb0240c6711072f7c52d7521e3eebad5c66e25
+Author: jc953 <jc953@cornell.edu>
+Date:   Tue Apr 8 18:08:12 2014 -0400
+
+    nearby and ahead
+
+commit e6b2e090f87aaf954bc75e3d0ee7c6c4fde0edeb
+Author: iaj8 <iaj8@cornell.edu>
+Date:   Tue Apr 8 17:49:41 2014 -0400
+
+    ishaan
+
+commit 8245a856a1f7130463a98da9e89764f9b830535b
+Author: iaj8 <iaj8@cornell.edu>
+Date:   Tue Apr 8 17:43:38 2014 -0400
+
+    hexes
+
+commit 390dd1ef6c675fc93301927d19ad7363bfa60597
+Author: iaj8 <iaj8@cornell.edu>
+Date:   Tue Apr 8 17:12:18 2014 -0400
+
+    ish
+
+commit db7c7ef87c90f0c2df7e0978f32fe70489805c0f
+Author: iaj8 <iaj8@cornell.edu>
+Date:   Mon Apr 7 18:47:59 2014 -0400
+
+    hexes
+
+commit b6748473870216638c523fccd911f32eef62c72a
+Author: jc953 <jc953@cornell.edu>
+Date:   Mon Apr 7 18:38:47 2014 -0400
+
+    switch cases prettier
+
+commit 47312970d993a4e0d798cddaf3c92190d1ae2360
+Merge: 2dd7af9 ce76e05
+Author: iaj8 <iaj8@cornell.edu>
+Date:   Mon Apr 7 18:34:31 2014 -0400
+
+    Merge branch 'master' of https://github.com/jc953/Assignment-5
+
+commit 2dd7af9b8a44d95898d06184f8216248d37135d9
+Author: iaj8 <iaj8@cornell.edu>
+Date:   Mon Apr 7 18:34:13 2014 -0400
+
+    unary
+
+commit ce76e0533c83a3e6aeb81eca5fb552d4f4ac674d
+Author: jc953 <jc953@cornell.edu>
+Date:   Mon Apr 7 18:19:56 2014 -0400
+
+    evals for everything except unary
+
+commit 0498b3a910398860f68cdc1da34ef7f75fbdaa0a
+Author: jc953 <jc953@cornell.edu>
+Date:   Mon Apr 7 17:49:57 2014 -0400
+
+    added Critter parameter to eval methods
+
+commit deb0596f49af2a69e6ae1855e2d35c88c5c3bd03
+Author: iaj8 <iaj8@cornell.edu>
+Date:   Mon Apr 7 17:23:01 2014 -0400
+
+    ishaan
+
+commit 8ab676db9ac7652cc48c043ddcd3d2c55abee370
+Author: iaj8 <iaj8@cornell.edu>
+Date:   Mon Apr 7 17:21:56 2014 -0400
+
+    test
+
+commit fd9f9b8168592eb2b6862a489c969e6c3448f6e3
+Author: jc953 <jc953@cornell.edu>
+Date:   Mon Apr 7 17:13:53 2014 -0400
+
+    Added hexinfo
+
+commit 07ba1df50f1ff04cadd741ae787dd4fc27540256
+Author: iaj8 <iaj8@cornell.edu>
+Date:   Mon Apr 7 16:45:33 2014 -0400
+
+    Ihsaan
+
+commit 20bb5f7ec748ce005cc14d68fe2a8f3f3d16d350
+Author: jc953 <jc953@cornell.edu>
+Date:   Mon Apr 7 09:20:42 2014 -0400
+
+    added example critter
+
+commit 3881a7f6e76fcb177983b1f6b18b28b7dbbf1d67
+Merge: b0269c7 5fd030c
+Author: jc953 <jc953@cornell.edu>
+Date:   Tue Mar 25 23:54:24 2014 -0400
+
+    Merge branch 'master' of https://github.com/jc953/Assignment-5
+
+commit b0269c7f4c8cd5de9e0187af17eb05952c0c554e
+Author: jc953 <jc953@cornell.edu>
+Date:   Tue Mar 25 23:54:07 2014 -0400
+
+    adding more console
+
+commit 5fd030cbe0c9b80c9ae14be6fc144cfcfcec4271
+Author: iaj8 <iaj8@cornell.edu>
+Date:   Tue Mar 25 23:44:13 2014 -0400
+
+    overview
+
+commit 042fac51ee92590309f1f9d918fbca4d0c3873f1
+Author: jc953 <jc953@cornell.edu>
+Date:   Tue Mar 25 22:24:21 2014 -0400
+
+    console stuff
+
+commit 75fd4ca4c0a6a1e2776c214f52f6a2c46380e932
+Author: iaj8 <iaj8@cornell.edu>
+Date:   Tue Mar 25 22:23:42 2014 -0400
+
+    ish's parsing
+
+commit d620fa852d5959d6423751e6dd01644250886041
+Author: jc953 <jc953@cornell.edu>
+Date:   Tue Mar 25 22:06:04 2014 -0400
+
+    editing console

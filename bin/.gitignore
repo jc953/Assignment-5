@@ -12,6 +12,7 @@
 /mate-critter2.txt
 /move-critter.txt
 /parse
+<<<<<<< HEAD
 /tag-critter.txt
 /turn-critter.txt
 /util
@@ -19,3 +20,8 @@
 /world.txt
 /writtenproblem.rtf
 /update-critter.txt
+=======
+/ast
+/writtenproblem.rtf
+/~$ittenproblem.rtf
+>>>>>>> 72e3f338526afdc727798e2648bc2f5648af7f03
