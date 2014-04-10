@@ -62,7 +62,7 @@ public class test {
 	public static void test4() throws FileNotFoundException, InterruptedException{
 		CritterWorld cw = new CritterWorld("src/world.txt");
 		int column = 10;
-		int row = 10;
+		int row = 11;
 		int arrayRow = row - ((column+1)/2);
 		cw.step();
 		assert cw.hexes[column][arrayRow].critter.mem[4] == 2495;
@@ -76,18 +76,13 @@ public class test {
 		int column = 1;
 		int row = 1;
 		int arrayRow = row - ((column+1)/2);
-		int d = cw.hexes[column][arrayRow].critter.direction;
-		cw.step(); cw.step();
-		System.out.println(d);
-		System.out.println(cw.hexes[column][arrayRow].critter.direction);
-		assert cw.hexes[column][arrayRow].critter.direction == d;
+		assert cw.hexes[column][arrayRow].critter.direction == 0;
+		cw.step(); 
+		assert cw.hexes[column][arrayRow].critter.direction == 5;
+		cw.step();
+		assert cw.hexes[column][arrayRow].critter.direction == 0;
 		assert cw.hexes[column][arrayRow].critter.mem[4] == 314;
 		System.out.println("Turn works");
-		//Note: 
-		//In world.txt change this line: critter src/turn-critter.txt 1 1 5 
-		//into critter src/turn-critter.txt 1 10 5
-		//and you get an error. Not sure why, will investigate later.
-	
 	}
 	
 	
@@ -97,17 +92,18 @@ public class test {
 		int row = 7;
 		int arrayRow = row - ((column+1)/2);
 		assert cw.hexes[column][arrayRow-1].critter == null;
-		cw.step();
+		cw.step(); 
 		assert cw.hexes[column][arrayRow-1].critter != null;
-		cw.step(); cw.step();
+		assert cw.hexes[column][arrayRow].critter.mem[4] == 1180;
+		assert cw.hexes[column][arrayRow-1].critter.mem[4] == Constants.INITIAL_ENERGY;
+		cw.step(); 
+		assert cw.hexes[column][arrayRow].critter.mem[4] == 1179;
+		assert cw.hexes[column][arrayRow].critter.direction == 1;
+		cw.step();
 		assert cw.hexes[column][arrayRow].critter == null;
-		//check that next bud has been laid
+		assert cw.hexes[column-1][arrayRow].critter != null;
+		assert cw.hexes[column-1][arrayRow].critter.mem[4] == Constants.INITIAL_ENERGY;
 		System.out.println("Bud works");
-		//Note: 
-		//In world.txt change this line: critter src/turn-critter.txt 1 1 5 
-		//into critter src/turn-critter.txt 1 10 5
-		//and you get an error. Not sure why, will investigate later.
-	
 	}
 }
 	

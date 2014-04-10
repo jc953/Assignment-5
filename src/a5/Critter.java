@@ -133,6 +133,9 @@ public class Critter {
 			}
 			mem[5]++;
 		}
+		if (!actionDone){
+			waitTurn();
+		}
 	}
 
 	/**
@@ -274,7 +277,9 @@ public class Critter {
 
 	public void turn(int n) {
 		assert (n == 1 || n == -1);
-		direction = (direction + n) % 6;
+		direction = direction + n;
+		if (direction < 0) direction += 6;
+		if (direction > 5) direction -= 6;
 		mem[4] -= mem[3];
 		if (mem[4] <= 0){
 			critterworld.kill(this);

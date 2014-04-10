@@ -32,13 +32,14 @@ public class Logical extends Binary<Condition, Logical.Op> implements Condition 
     	boolean r = right.eval(c);
     	switch (op){
     	case OR:
-    		if (l || r)
-    			return true;
+    		if (l || r) return true;
+    		return false;
     	case AND:
-    		if (l && r)
-    			return true;
+    		if (l && r) return true;
+    		return false;
+    	default:
+    		return false;	
     	}
-    	return false;
 	}
     
     

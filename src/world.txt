@@ -4,7 +4,7 @@ rock 10 10
 critter src/wait-critter.txt 5 2 3
 critter src/move-critter.txt 4 3 1
 critter src/grow-critter.txt 4 4 2
-critter src/attack-critter.txt 10 10 0
-critter src/attacked-critter.txt 11 10 5
+critter src/attack-critter.txt 11 10 0
+critter src/attacked-critter.txt 12 10 5
 critter src/turn-critter.txt 1 1 0
 critter src/bud-critter.txt 7 1 0

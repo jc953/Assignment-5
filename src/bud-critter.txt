@@ -2,8 +2,8 @@ memsize: 9
 defense: 2
 offense: 3
 size: 1
-energy: 2287
+energy: 2359
 posture: 17
-mem[4] = 2287 --> bud;
-mem[4] = 1144 --> right;
-mem[4] = 1143 --> bud;
+mem[4] = 2359 --> bud;
+mem[4] = 1180 --> right;
+mem[4] = 1179 --> bud;

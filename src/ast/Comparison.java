@@ -54,25 +54,26 @@ public class Comparison extends Binary<Expression, Comparison.Op> implements
         int r = right.eval(c);
         switch (op) {
         case LT: 
-        	if (l < r)
-        		return true;
+        	if (l < r) return true;
+        	return false;
         case LE: 
-        	if (l <= r)
-        		return true;
+        	if (l <= r) return true;
+        	return false;
         case EQ: 
-        	if (l == r)
-        		return true;
+        	if (l == r) return true;
+        	return false;
         case GE: 
-        	if (l >= r)
-        		return true;
+        	if (l >= r) return true;
+        	return false;
         case GT: 
-        	if (l > r)
-        		return true;
+        	if (l > r) return true;
+        	return false;
         case NE: 
-        	if (l != r)
-        		return true;
+        	if (l != r) return true;
+        	return false;
+        default:
+        	return false;
         }
-        return false;
     }
 
 	@Override
