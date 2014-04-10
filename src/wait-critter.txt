@@ -5,3 +5,5 @@ size: 1
 energy: 495
 posture: 17
 1 = 1 --> wait;
+//ishaan
+1 = 1 --> wait;

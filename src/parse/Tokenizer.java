@@ -103,8 +103,8 @@ public class Tokenizer implements Iterator<Token> {
 			c = nextChar();
 
 		// consume whitespaces
-		while (c == ' ' || c == '\t' || c == '\n' || c == '\r') {
-			if (c == '\n')
+		while (c == ' ' || c == '\t' || c == '\n' || c == '\r' || buf.indexOf("//") != -1) {
+			if (c == '\n' || buf.indexOf("//") != -1)
 				lineNo++;
 			c = nextChar();
 		}

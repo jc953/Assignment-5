@@ -5,3 +5,4 @@ size: 1
 energy: 495
 posture: 17
 1 = 1 --> wait;
+1 = 1 --> wait;
