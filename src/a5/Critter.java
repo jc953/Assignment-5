@@ -11,15 +11,14 @@ public class Critter {
 	Program program;
 	Rule lastRule;
 	public int[] mem;
-	int direction;
+	public int direction;
 	int column;
 	int row;
 	boolean matePossible;
 
 	public Critter(String file, int direction, int column, int row, CritterWorld critterworld) {
 		try {
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					new FileInputStream(file)));
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
 			int[] memNums = new int[6];
 			for (int i = 0; i < memNums.length; i++){
 				String line = br.readLine();
@@ -31,6 +30,7 @@ public class Critter {
 			for (int i = 0; i < memNums.length - 1; i++){
 				mem[i] = memNums[i];
 			}
+			if (mem[4] > mem[3] * Constants.ENERGY_PER_SIZE) mem[4] = mem[3] * Constants.ENERGY_PER_SIZE;
 			mem[5] = 1;
 			mem[6] = 0;
 			mem[7] = memNums[5];
@@ -242,6 +242,7 @@ public class Critter {
 
 	public void waitTurn() {
 		mem[4] = mem[4] + Constants.SOLAR_FLUX;
+		if (mem[4] > mem[3] * Constants.ENERGY_PER_SIZE) mem[4] = mem[3] * Constants.ENERGY_PER_SIZE;
 	}
 	
 	public void move(int forOrBack) {

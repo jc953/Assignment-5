@@ -76,10 +76,7 @@ public class Rule extends AbstractNode {
 				}
 			}
 		case REMOVE:
-			boolean inRules = program.rules.remove(this);
-			if (!inRules) {
-				throw new AssertionError();
-			}
+			program.rules.remove(this);
 			return true;
 		case COPY_TREE:
 			return Mutation.copyListedTree(this, program.rules, program);

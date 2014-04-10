@@ -116,7 +116,7 @@ public class Token {
 	 * @return true if this token is of action type
 	 */
 	public boolean isAction() {
-		return 10 <= type && type <= 20;
+		return 10 <= type && type <= 21;
 	}
 
 	/**

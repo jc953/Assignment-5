@@ -55,10 +55,7 @@ public class Mutation {
 		}
 		List<Node> alikes = new ArrayList<Node>();
 		root(node).query(Utils.isA(category), alikes);
-		boolean inCategory = alikes.remove(node);
-		if (!inCategory) {
-			throw new AssertionError();
-		}
+		alikes.remove(node);
 		return (List<T>) alikes;
 	}
 

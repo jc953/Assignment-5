@@ -4,8 +4,6 @@ offense: 7
 size: 1
 energy: 500
 posture: 17
-1 = 1 --> forward;
-1 = 1 --> forward;
-1 = 1 --> forward;
-1 = 1 --> forward;
-1 = 1 --> forward;
+mem[4] = 500 --> forward;
+mem[4] = 497 --> left;
+mem[4] = 496 --> forward;

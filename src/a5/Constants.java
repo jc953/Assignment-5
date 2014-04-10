@@ -25,7 +25,7 @@ public class Constants {
 	static int MATE_COST;
 	static int RULE_COST;
 	static int ABILITY_COST;
-	static int INITIAL_ENERGY;
+	public static int INITIAL_ENERGY;
 	static int MIN_MEMORY;
 	
 	/**
