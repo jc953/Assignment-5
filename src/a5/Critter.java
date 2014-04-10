@@ -92,6 +92,11 @@ public class Critter {
 		matePossible = false;
 	}
 
+	/**
+	 * method to coordinate the actions and reactions of this Critter 
+	 * when the world advances a timestep.
+	 * @throws InterruptedException
+	 */
 	public void step() throws InterruptedException {
 		mem[5] = 1;
 		boolean actionDone = false;
@@ -165,12 +170,10 @@ public class Critter {
 	}
 
 	/**
-	 * 
-	 * returns int array [nextColumn, nextRow, prevColumn, prevRow]
-	 * 
-	 * @param column
-	 * @param row
-	 * @return
+	 * method to give the adjacent positions to the Critter's current position
+	 * @param column the Critter's current column
+	 * @param row the Critter's current row
+	 * @return int array [nextColumn, nextRow, prevColumn, prevRow]
 	 */
 	public int[] getAdjacentPositions(int column, int row) {
 		int[] result = new int[4];
@@ -255,22 +258,37 @@ public class Critter {
 		}
 		return result;
 	}
-	
+	/**
+	 * method to check whether the Critter is trying to situate itself on
+	 * a rock, another Critter or off the edge of the world
+	 * @param column Critter's current column
+	 * @param row Critter's current row
+	 * @return true if the Critter can occupy the position it 
+	 * is trying to currently occupy. False otherwise
+	 */
 	public boolean validHex(int column, int row){
 		return column >= 0 && column < Constants.MAX_COLUMN && row >= 0 && row < Constants.MAX_ARRAY_ROW && critterworld.hexes[column][row].isFree();
 	}
-	
+	/**
+	 * method to get the Critter's complexity
+	 * @return Critter's complexity
+	 */
 	public int getComplexity(){
 		int a = program.rules.size() * Constants.RULE_COST;
 		int b = (mem[1]+mem[2]) * Constants.ABILITY_COST;
 		return a+b;
 	}
-
+	
+	/**
+	 * method to perform the wait action 
+	 */
 	public void waitTurn() {
 		mem[4] = mem[4] + Constants.SOLAR_FLUX;
 		if (mem[4] > mem[3] * Constants.ENERGY_PER_SIZE) mem[4] = mem[3] * Constants.ENERGY_PER_SIZE;
 	}
-	
+	/**
+	 * method to perform the forward or backward action 
+	 */	
 	public void move(int forOrBack) {
 		assert (forOrBack == -1 || forOrBack == 1);
 		if (Constants.MOVE_COST >= mem[4]) {
@@ -302,6 +320,9 @@ public class Critter {
 		}
 	}
 
+	/**
+	 * method to perform the left or right action 
+	 */
 	public void turn(int n) {
 		assert (n == 1 || n == -1);
 		direction = direction + n;
@@ -312,7 +333,9 @@ public class Critter {
 			critterworld.kill(this);
 		}
 	}
-
+	/**
+	 * method to perform the eat action 
+	 */
 	public void eat() {
 		mem[4] -= mem[3];
 		if (mem[4] + critterworld.hexes[column][row].food > Constants.ENERGY_PER_SIZE * mem[3]) {
@@ -327,7 +350,11 @@ public class Critter {
 			critterworld.kill(this);
 		}
 	}
-
+	
+	
+	/**
+	 * method to perform the serve action 
+	 */
 	public void serve(int amountServed) {
 		if (amountServed < mem[4]) {
 			mem[4] -= (amountServed + mem[3]);
@@ -338,6 +365,9 @@ public class Critter {
 		}
 	}
 
+	/**
+	 * method to perform the attack action 
+	 */
 	public void attack() {
 		int[] pos = getAdjacentPositions(column, row);
 		if (pos[0] < 0 || pos[0] > Constants.MAX_COLUMN){
@@ -351,6 +381,9 @@ public class Critter {
 		}
 	}
 
+	/**
+	 * method to coordinate a Critter's response to being attacked by another Critter 
+	 */
 	public void attacked(Critter attacker) {
 		double x = Constants.DAMAGE_INC * ((attacker.mem[3] * attacker.mem[2])-(mem[3]*mem[1]));
 		double p = 1.0 / (1.0 + Math.pow(Math.E, -x));
@@ -361,7 +394,11 @@ public class Critter {
 			mem[4] = mem[4] - (int)(damage);
 		}
 	}
-
+	
+	
+	/**
+	 * method to perform the tag action 
+	 */
 	public void tag(int tagNumber) {
 		assert (tagNumber <= 99 && tagNumber >= 0);
 		mem[4] -= mem[3];
@@ -376,6 +413,10 @@ public class Critter {
 		}
 	}
 
+	
+	/**
+	 * method to perform the grow action 
+	 */
 	public void grow() {
 		if (mem[3]*getComplexity()*Constants.GROW_COST >= mem[4]) {
 			critterworld.kill(this);
@@ -385,7 +426,11 @@ public class Critter {
 			mem[4] -= mem[3]*getComplexity()*Constants.GROW_COST;
 		}
 	}
-
+	
+	
+	/**
+	 * method to perform the bud action 
+	 */
 	public boolean bud() {
 		mem[4] -= Constants.BUD_COST * getComplexity();
 		if (mem[4] < 0){
@@ -413,7 +458,9 @@ public class Critter {
 		}
 	}
 
-
+	/**
+	 * method to perform the mate action 
+	 */
 	public boolean mate(){
 		int[] pos = getAdjacentPositions(column, row);
 		Critter mate = critterworld.hexes[pos[0]][pos[1]].critter;
@@ -522,6 +569,11 @@ public class Critter {
 		}
 	}
 	
+	
+	/**
+	 * method to coordinate the mutation of the Critter's offspring's attributes at the time of 
+	 * budding or mating
+	 */
 	public int[] mutateAttributes(int[] mem){
 		double i = Math.random();
 		if (i < 1.0/3){
@@ -561,7 +613,10 @@ public class Critter {
 			return mem;
 		}
 	}
-
+	
+	/**
+	 * method to perform the nearby sensory action 
+	 */
 	public int nearby(int dir) {
 		int originalDir = direction;
 		direction = (direction + dir) % 6;
@@ -573,7 +628,9 @@ public class Critter {
 		direction = originalDir;
 		return ans;
 	}
-
+	/**
+	 * method to perform the ahead sensory action 
+	 */
 	public int ahead(int dist) {
 		if (dist == 0)
 			return critterworld.hexes[column][row].determineContents(false);
@@ -595,6 +652,10 @@ public class Critter {
 		return ans;
 	}
 
+	/**
+	 * method to display comprehensive information about this Critter and 
+	 * all its attributes and rules 
+	 */
 	public void getInfo() {
 		System.out.println("This hex contains a critter.");
 		System.out.println("MEMSIZE : " + mem[0]);
