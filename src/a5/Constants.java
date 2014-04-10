@@ -2,6 +2,9 @@ package a5;
 
 import java.io.*;
 
+/**
+ * Holds the constants used in CritterWorld.
+ */
 public class Constants {
 
 	static int BASE_DAMAGE;
@@ -10,9 +13,9 @@ public class Constants {
 	static int FOOD_PER_SIZE;
 	static int MAX_SMELL_DISTANCE;
 	static int ROCK_VALUE;
-	static int MAX_COLUMN;
+	public static int MAX_COLUMN;
 	static int MAX_ROW;
-	static int MAX_ARRAY_ROW;
+	public static int MAX_ARRAY_ROW;
 	static int MAX_RULES_PER_TURN;
 	static int SOLAR_FLUX;
 	static int MOVE_COST;
@@ -25,6 +28,12 @@ public class Constants {
 	static int INITIAL_ENERGY;
 	static int MIN_MEMORY;
 	
+	/**
+	 * Reads the constants from a given file and assigns them to the variables.
+	 * Also assigns MAX_ARRAY_ROW to MAX_ROW - MAX_COLUMN/2, where MAX_ARRAY_ROW
+	 * represents the number of rows in the 2D representation.
+	 * @param file
+	 */
 	public static void read(String file){
 		try{
 			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file)));
